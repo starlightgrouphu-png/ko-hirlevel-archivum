@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /leiratkozas
+Disallow: /hirlevel-megerosites
+
+Sitemap: https://hirlevel.kockaorszag.hu/sitemap.xml
