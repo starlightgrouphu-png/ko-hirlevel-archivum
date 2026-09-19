@@ -2,3 +2,6 @@
 .vercel/
 node_modules/
 .DS_Store
+.git-credentials
+*.env
+.env
