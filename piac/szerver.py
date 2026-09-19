@@ -38,6 +38,37 @@ import belepo_lap          # noqa: E402
 _PROBAK = {}          # H4: kiserlet-korlat (IP -> [idobelyeg,...])
 import qr_svg        # noqa: E402
 
+# ══ HÁLÓZATI KAPU (Ferenc 09-19: belépés KI, helyi hálózat + Tailscale) ══
+# C) út: csak a SAJÁT gépeink címeiről fogadunk. Minden más -> 403.
+# A Tailscale itt NEM tiltás, hanem ENGEDÉLY: a saját tailnet-címünk jöhet.
+_BELEPES_KELL = False          # a jelszó/QR/TOTP belépés KI van kapcsolva
+
+# amely hálózatokról fogadunk (a saját gépeink)
+# PONTOS címek (nem prefix-ről!) — különben egy MÁS tailnet-gép is bejöhetne
+_ENGEDETT_IPK = frozenset({
+    "127.0.0.1", "::1",          # ez a gép
+    "10.255.255.254",            # WSL belső
+    "172.17.0.1", "172.18.0.1", "172.21.0.1",   # docker-hidak
+    "172.23.231.239",            # WSL helyi hálózat (a saját eth0-nk)
+    "100.88.3.101",              # Tailscale (a MI /32 címünk)
+})
+_ENGEDETT_HALOZATOK = ("127.", "10.255.255.", "172.17.", "172.18.",
+                       "172.21.", "172.23.231.", "100.88.3.101")
+
+
+def _ip_engedett(ip):
+    """A kérés forrás-IP-je a SAJÁT gépeink egyike-e?
+    Pontos egyezés VAGY szűk prefix (a docker/WSL-hidak változhatnak)."""
+    if not ip:
+        return False
+    if ip in _ENGEDETT_IPK:
+        return True
+    # a saját tailnet-címünk pontosan (100.88.3.101) — NEM a teljes /24
+    return ip.startswith(("127.", "10.255.255.", "172.17.", "172.18.",
+                          "172.21.", "172.23."))   # 172.23. = a WSL hálózat
+                                                       # (a Windows-host is innen jön)
+
+
 PORT = int(os.getenv("PIAC_PORT", "8100"))
 WEB = os.path.join(BASE, "web")
 
@@ -243,6 +274,18 @@ class Kezelo(BaseHTTPRequestHandler):
             self._html(fh.read())
 
     def do_GET(self):
+        # HALOZATI KAPU: idegen forras-IP -> 403 (meg a belepes elott)
+        if not _ip_engedett(self.client_address[0]):
+            # FORRAS-IP NAPLO: a kizart keresek rogzitese (diagnosztika)
+            try:
+                with open("/tmp/piac_kizart_ipk.txt", "a") as _f:
+                    _f.write("%s  %s  %s\n" % (time.strftime("%H:%M:%S"),
+                                                self.client_address[0], self.path))
+            except Exception:
+                pass
+            return self._html("<h2>403 — ez a cím nem érhető el innen.</h2>"
+                              "<p>Ez a szerver csak a helyi hálózatról és a "
+                              "saját Tailscale-címről érhető el.</p>", 403)
         p = urllib.parse.urlparse(self.path)
         q = urllib.parse.parse_qs(p.query)
         ut = p.path
@@ -261,7 +304,8 @@ class Kezelo(BaseHTTPRequestHandler):
             return self._json({"ok": True, "szint": "nyilvanos"})
         # QR-BELEPES-BEKOTVE
         _kapu, _eszkoz = auth.sutik_olvas(self.headers)
-        _belepve = auth.suti_ervenyes(_kapu) or auth.eszkoz_ervenyes(_eszkoz)
+        # _BELEPES_KELL=False -> a halozati kapu ved (IP), belépés nem kell
+        _belepve = (not _BELEPES_KELL) or auth.suti_ervenyes(_kapu) or auth.eszkoz_ervenyes(_eszkoz)
         if ut == "/qr/kep":
             return self._qr_kepe(q)
         if ut == "/qr/indit":
@@ -313,7 +357,11 @@ class Kezelo(BaseHTTPRequestHandler):
             tid = (q.get("id") or [""])[0]
             return self._json({"torolve": auth.eszkoz_torol(tid)})
         if auth.keres_vedett(ut) and not _belepve:
-            return self._html(auth.belepes_lap(), 200)
+            kod = auth.qr_indit()
+            return self._html(belepo_lap.lap(qr_kod=kod,
+                                             qr_titok=auth.qr_gep_titok(kod),
+                                             qr_kor=auth.QR_KOR,
+                                             totp_link=totp_motor.otpauth_link()), 200)
 
         if ut in ("/", "/index.html"):
             return self._fajl("index.html")
@@ -368,6 +416,8 @@ class Kezelo(BaseHTTPRequestHandler):
         _PROBAK.setdefault(ip, []).append(_t.time())
 
     def do_POST(self):
+        if not _ip_engedett(self.client_address[0]):
+            return self._html("<h2>403 — ez a cím nem érhető el innen.</h2>", 403)
         p = urllib.parse.urlparse(self.path)
         hossz = int(self.headers.get("Content-Length") or 0)
         nyers = self.rfile.read(hossz) if hossz else b""
@@ -390,7 +440,11 @@ class Kezelo(BaseHTTPRequestHandler):
                                                ua=self.headers.get("User-Agent", ""))),
                     "<meta http-equiv='refresh' content='0;url=/'>Belépve kóddal..."
                     .encode("utf-8"))
-            return self._html(auth.belepes_lap(hiba=True), 401)
+            _k = auth.qr_indit()
+            return self._html(belepo_lap.lap(hiba=True, qr_kod=_k,
+                                             qr_titok=auth.qr_gep_titok(_k),
+                                             qr_kor=auth.QR_KOR,
+                                             totp_link=totp_motor.otpauth_link()), 401)
         if p.path == "/belepes":
             # H4: kiserlet-korlat (brute-force vedelem)
             if not self._kiserlet_ok():
@@ -408,7 +462,11 @@ class Kezelo(BaseHTTPRequestHandler):
                 return self._valasz(200, auth.sutik_fejlec(suti, eszkoz=eszkoz),
                                     "<meta http-equiv='refresh' content='0;url=/'>Belépve...</".encode("utf-8"))
             self._kiserlet_rogzit()
-            return self._html(auth.belepes_lap(hiba=True), 401)
+            _k = auth.qr_indit()
+            return self._html(belepo_lap.lap(hiba=True, qr_kod=_k,
+                                             qr_titok=auth.qr_gep_titok(_k),
+                                             qr_kor=auth.QR_KOR,
+                                             totp_link=totp_motor.otpauth_link()), 401)
 
         try:
             adat = json.loads(nyers.decode("utf-8")) if nyers else {}
