@@ -206,10 +206,39 @@ def sutik_fejlec(suti, torles=False, eszkoz=None):
 
 # ── 3) QR-KÓD (a gép képernyőjén -> telefon beolvassa -> a gép belép) ───────
 def qr_indit(gep_nev=""):
-    """Új QR-kérés. A gép böngészője hívja; a token 90 mp-ig él."""
+    """Új QR-kérés. A gép böngészője hívja; a token 90 mp-ig él.
+    K1-JAVÍTÁS: a gép kap egy TITKOS ellenőrzőt, ami a QR-képen NEM látszik.
+    A telefon ezt nem ismeri -> NEM tud önállóan megerősítést adni magának."""
     kod = secrets.token_urlsafe(16)
-    _QR[kod] = {"letrehozva": time.time(), "allapot": "var", "gep": (gep_nev or "")[:40]}
+    with _ZAR:
+        _QR[kod] = {"letrehozva": time.time(), "allapot": "var",
+                    "gep": (gep_nev or "")[:40],
+                    "gep_titok": secrets.token_urlsafe(24)}
     return kod
+
+
+def qr_gep_titok(kod):
+    """A QR-t kérő gép titka (a gép oldala adja át a megerősítéskor)."""
+    with _ZAR:
+        a = _QR.get(kod)
+        return a.get("gep_titok") if a else None
+
+
+def qr_megerosit_gep(kod, gep_titok, telefon_nev="telefon"):
+    """K1: megerősítés CSAK a QR-t kérő gép titkával.
+    A telefon megnyitja a linket, de a titkot a GÉP oldala adja át
+    -> idegen a tailneten nem tud belépést adni magának."""
+    with _ZAR:
+        a = _QR.get(kod)
+        if not a or time.time() - a.get("letrehozva", 0) > 300:
+            return False
+        if not gep_titok or not secrets.compare_digest(a.get("gep_titok", ""), gep_titok):
+            return False
+        a["allapot"] = "megerositve"
+        a["megerositve_ido"] = time.time()
+        a["telefon"] = (telefon_nev or "")[:30]
+        _QR[kod] = a
+        return True
 
 
 def qr_ervenyes(kod):
@@ -222,9 +251,23 @@ def qr_ervenyes(kod):
     return True
 
 
+def qr_telefon_jel(kod, telefon_nev="telefon"):
+    """K1: a TELEFON csak JELET ad (nem belépést!) — a gep oldala latja a poll-ban.
+    A megerosites a GEP dolga (o ismeri a titkot) -> idegen nem tud belépni."""
+    with _ZAR:
+        a = _QR.get(kod)
+        if not a or time.time() - a.get("letrehozva", 0) > 300:
+            return False
+        if a.get("allapot") == "var":
+            a["allapot"] = "telefon_latta"
+            a["telefon"] = (telefon_nev or "telefon")[:30]
+            a["telefon_ido"] = time.time()
+            _QR[kod] = a
+        return True
+
+
 def qr_megerosit(kod):
-    """A telefon hívja (a QR-ban lévő linket megnyitva) -> a gép belép.
-    H2/H3: zár alatt, és rögzíti a megerősítés idejét (lejárat-ellenőrzéshez)."""
+    """A gep erősíti meg (a telefon jelzése után). Csak a gep hívja."""
     with _ZAR:
         a = _QR.get(kod)
         if not a or time.time() - a.get("letrehozva", 0) > 300:
@@ -232,18 +275,6 @@ def qr_megerosit(kod):
         a["allapot"] = "megerositve"
         a["megerositve_ido"] = time.time()
         _QR[kod] = a
-        return True
-
-
-def qr_atalakit(kod):
-    """H2: ATOMIVAN 'megerositve' -> 'belepve' (csak egyszer lephet be vele)."""
-    with _ZAR:
-        if not qr_ervenyes(kod):
-            return False
-        e = _QR.get(kod)
-        if not e or e["allapot"] != "megerositve":
-            return False
-        e["allapot"] = "belepve"
         return True
 
 
@@ -271,7 +302,7 @@ def qr_atalakit(kod):
         if time.time() - a.get("megerositve_ido", 0) > 300:
             _QR.pop(kod, None)
             return False
-        a["allapot"] = "felhasznalva"
+        a["allapot"] = "belepve"
         _QR[kod] = a
         return True
 
@@ -306,7 +337,7 @@ def sutik_olvas(fejlecek):
     return kapu, eszkoz
 
 
-def belepes_lap(hiba=False, qr_kod=None):
+def belepes_lap(hiba=False, qr_kod=None, qr_titok=None):
     """A belépő oldal: jelszó + QR-kód (a QR a gépen jelenik meg)."""
     hibauzenet = ("<p class='hiba'>Hibás jelszó.</p>" if hiba else "")
     qr_blokk = ""
@@ -317,15 +348,24 @@ def belepes_lap(hiba=False, qr_kod=None):
     <img src="/qr/kep?kod=__KOD__" alt="QR-kód" width="200" height="200">
     <p class="kicsi">A telefon beolvassa, és ez a gép belép.</p>
   </div>
-  <script>/* QR-POLL-BEKOTVE */
+  <script>/* QR-POLL-BEKOTVE (K1: a gep erositi meg) */
   (function(){
     var kod = "__KOD__";
-    var n = 0;
+    var n = 0, titok = "", megerositve = false;
+    // a titkot a GEP keri le — ez a QR-kepen NEM latszik (K1)
+    titok = "__TITOK__";
     var id = setInterval(function(){
       n++;
       if (n > 180) { clearInterval(id); return; }   // 90 mp utan feladja
       fetch("/qr/allapot?kod=" + kod).then(function(r){ return r.json(); })
         .then(function(d){
+          // a telefon csak JELEZ -> a GEP erositi meg a sajat titkaval
+          if (d.allapot === "telefon_latta" && !megerositve) {
+            megerositve = true;
+            fetch("/qr/megerosit?kod=" + kod + "&t=" + encodeURIComponent(titok))
+              .then(function(r){ return r.json(); }).catch(function(){});
+          }
+          if (d.allapot === "belepve") { clearInterval(id); return; }
           if (d.allapot === "megerositve") {
             clearInterval(id);
             window.location.href = "/qr/belepes?kod=" + kod;
@@ -333,7 +373,7 @@ def belepes_lap(hiba=False, qr_kod=None):
         }).catch(function(){});
     }, 1500);
   })();
-  </script>""".replace("__KOD__", qr_kod)
+  </script>""".replace("__KOD__", qr_kod).replace("__TITOK__", qr_titok or "")
     lap = """<!doctype html><html lang="hu"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Belépés — Piaci Ár-elemző</title>

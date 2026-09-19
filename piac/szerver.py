@@ -247,7 +247,8 @@ class Kezelo(BaseHTTPRequestHandler):
 
         # ── JELSZAVAS KAPU (a Tailscale-en kívül is védett) ───────────────
         if ut == "/belepes":
-            return self._html(auth.belepes_lap(qr_kod=auth.qr_indit()))
+            kod = auth.qr_indit()
+            return self._html(auth.belepes_lap(qr_kod=kod, qr_titok=auth.qr_gep_titok(kod)))
         if ut == "/kilepes":
             return self._valasz(200, auth.sutik_fejlec("", torles=True),
                                 "Kilépve. <a href='/belepes'>Új belépés</a>".encode("utf-8"))
@@ -259,7 +260,8 @@ class Kezelo(BaseHTTPRequestHandler):
         if ut == "/qr/kep":
             return self._qr_kepe(q)
         if ut == "/qr/indit":
-            return self._json({"kod": auth.qr_indit(), "kor": auth.QR_KOR})
+            kod = auth.qr_indit()
+            return self._json({"kod": kod, "titok": auth.qr_gep_titok(kod), "kor": auth.QR_KOR})
         if ut == "/qr/allapot":
             kod = (q.get("kod") or [""])[0]
             return self._json({"allapot": auth.qr_allapot(kod)})
@@ -274,12 +276,21 @@ class Kezelo(BaseHTTPRequestHandler):
                                     "<meta http-equiv='refresh' content='0;url=/'>"
                                     "Belépve QR-rel...".encode("utf-8"))
             return self._html("<h3>A QR nem érvényes.</h3>", 410)
-        if ut == "/qr/megerosit":
+        if ut == "/qr/telefon":
+            # K1: a TELEFON csak jelez — a gép erősíti meg (ő ismeri a titkot)
             kod = (q.get("kod") or [""])[0]
-            if auth.qr_megerosit(kod):
-                return self._html("<meta http-equiv='refresh' content='1;url=/'>"
-                                  "<h2>Megerősítve — a gép belép.</h2>")
+            tnev = self.headers.get("User-Agent", "telefon")[:30]
+            if auth.qr_telefon_jel(kod, tnev):
+                return self._html("<h2>Telefon észlelve — a gép most belép.</h2>"
+                                  "<p>Nyugodtan zárd be ezt az oldalt.</p>")
             return self._html("<h2>A kód lejárt vagy érvénytelen.</h2>", 410)
+        if ut == "/qr/megerosit":
+            # K1: megerosites CSAK a QR-t kero gep titkaval (idegen nem tud maganak belépést adni)
+            kod = (q.get("kod") or [""])[0]
+            titok = (q.get("t") or [""])[0]
+            if auth.qr_megerosit_gep(kod, titok):
+                return self._json({"ok": True})
+            return self._json({"ok": False}, 403)
         if ut == "/eszkozok" and _belepve:
             return self._json({"eszkozok": auth.eszkozok_lista(),
                                "hatralevo_nap": auth.ESZKOZ_KOR // 86400})
@@ -395,7 +406,7 @@ class Kezelo(BaseHTTPRequestHandler):
         kod = (q.get("kod") or [""])[0]
         if not auth.qr_ervenyes(kod):
             return self._html("<h3>A QR lejárt — töltsd újra az oldalt.</h3>", 410)
-        link = "http://%s/qr/megerosit?kod=%s" % (hoszt, kod)
+        link = "http://%s/qr/telefon?kod=%s" % (hoszt, kod)
         svg = qr_svg.qr_svg(link, meret=220)
         return self._valasz(200, [], svg.encode("utf-8"),
                             tipus="image/svg+xml; charset=utf-8")
