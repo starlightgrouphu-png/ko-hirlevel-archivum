@@ -40,18 +40,27 @@ def qr_svg(szoveg, meret=200, margo=4):
     if _VAN_SEGNO:
         try:
             q = segno.make(szoveg, error="m")
-            from io import StringIO
-            out = StringIO()
-            q.save(out, kind="svg", scale=1, border=margo, dark="#000", light="#fff")
-            svg = out.getvalue()
-            # a méretet a meret-re igazítjuk (viewBox marad)
-            if "viewBox" in svg:
-                import re
-                m = re.search(r'viewBox="([^"]+)"', svg)
-                if m:
-                    x, y, w, h = m.group(1).split()
-                    svg = re.sub(r'<svg([^>]*?)width="[^"]*"', r'<svg\1width="%d"' % meret, svg, count=1)
-                    svg = re.sub(r'<svg([^>]*?)height="[^"]*"', r'<svg\1height="%d"' % meret, svg, count=1)
+            # FONTOS: a segno.save() BYTE-okat ír -> BytesIO kell (StringIO
+            # TypeError-t ad, azt a try/except elnyelné, és a HIBÁS tartalék
+            # rajzoló futna -> olvashatatlan QR. Ez volt a 09-19-i hiba oka.)
+            from io import BytesIO
+            out = BytesIO()
+            q.save(out, kind="svg", border=margo, dark="#000", light="#fff")
+            svg = out.getvalue().decode("utf-8")
+            # a méretet a meret-re igazítjuk (a viewBox-ot is, hogy ne torzuljon)
+            import re
+            m = re.search(r'viewBox="([^"]+)"', svg)
+            if m:
+                # a segno viewBox-t csak akkor ír, ha scale-t adtunk; itt nincs,
+                # ezért a width/height + viewBox együtt állítjuk
+                x, y, w, h = m.group(1).split()
+                svg = re.sub(r'viewBox="[^"]+"', 'viewBox="%s %s %s %s"' % (x, y, w, h), svg, count=1)
+            # width/height -> a kért méret (a viewBox marad -> nem torzul)
+            svg = re.sub(r'(<svg[^>]*?)width="[^"]*"', r'\1width="%d"' % meret, svg, count=1)
+            svg = re.sub(r'(<svg[^>]*?)height="[^"]*"', r'\1height="%d"' % meret, svg, count=1)
+            if 'viewBox' not in svg and 'width="%d"' % meret in svg:
+                # ha nincs viewBox, tegyük be a saját méretből (arányos nagyítás)
+                svg = svg.replace('<svg ', '<svg viewBox="0 0 %d %d" ' % (meret, meret), 1)
             return svg
         except Exception:
             pass

@@ -32,7 +32,9 @@ BASE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, BASE)
 import sema          # noqa: E402
 import felismero     # noqa: E402
-import auth          # noqa: E402
+import auth
+import totp as totp_motor
+import belepo_lap          # noqa: E402
 _PROBAK = {}          # H4: kiserlet-korlat (IP -> [idobelyeg,...])
 import qr_svg        # noqa: E402
 
@@ -248,7 +250,10 @@ class Kezelo(BaseHTTPRequestHandler):
         # ── JELSZAVAS KAPU (a Tailscale-en kívül is védett) ───────────────
         if ut == "/belepes":
             kod = auth.qr_indit()
-            return self._html(auth.belepes_lap(qr_kod=kod, qr_titok=auth.qr_gep_titok(kod)))
+            return self._html(belepo_lap.lap(qr_kod=kod,
+                                             qr_titok=auth.qr_gep_titok(kod),
+                                             qr_kor=auth.QR_KOR,
+                                             totp_link=totp_motor.otpauth_link()))
         if ut == "/kilepes":
             return self._valasz(200, auth.sutik_fejlec("", torles=True),
                                 "Kilépve. <a href='/belepes'>Új belépés</a>".encode("utf-8"))
@@ -276,6 +281,14 @@ class Kezelo(BaseHTTPRequestHandler):
                                     "<meta http-equiv='refresh' content='0;url=/'>"
                                     "Belépve QR-rel...".encode("utf-8"))
             return self._html("<h3>A QR nem érvényes.</h3>", 410)
+        if ut == "/totp/kep":
+            # az otpauth:// QR az Authenticatorhoz (nem a belepesi QR!)
+            svg = qr_svg.qr_svg(totp_motor.otpauth_link(), meret=220)
+            return self._valasz(200, [], svg.encode("utf-8"),
+                                tipus="image/svg+xml; charset=utf-8")
+        if ut == "/totp/allapot":
+            return self._json({"kod": totp_motor.kod(),
+                               "hatralevo": totp_motor.hatralevo()})
         if ut == "/qr/telefon":
             # K1: a TELEFON csak jelez — a gép erősíti meg (ő ismeri a titkot)
             kod = (q.get("kod") or [""])[0]
@@ -345,6 +358,10 @@ class Kezelo(BaseHTTPRequestHandler):
         _PROBAK[ip] = lista
         return True
 
+    def _kiserlet_nullaz(self):
+        """Sikeres belépés után a próbák törlése (a jó jelszó/kód ne büntessen)."""
+        _PROBAK.pop(self.client_address[0], None)
+
     def _kiserlet_rogzit(self):
         import time as _t
         ip = self.client_address[0]
@@ -356,6 +373,24 @@ class Kezelo(BaseHTTPRequestHandler):
         nyers = self.rfile.read(hossz) if hossz else b""
 
         # ── bejelentkezés (űrlap) ─────────────────────────────────────────
+        if p.path == "/totp":
+            # TOTP kod (az Authenticatorbol) — ugyanaz a belepes, mint a jelszonal
+            try:
+                mezok = urllib.parse.parse_qs(nyers.decode("utf-8"))
+                beirt = (mezok.get("kod") or [""])[0]
+            except Exception:
+                beirt = ""
+            if not self._kiserlet_ok():
+                return self._html("<h3>Túl sok hibás próba. Várj 5 percet.</h3>", 429)
+            if totp_motor.ellenoriz(beirt):
+                self._kiserlet_nullaz()
+                return self._valasz(200, auth.sutik_fejlec(
+                    auth.suti_keszit("ferenc"),
+                    eszkoz=auth.eszkoz_keszit(nev="TOTP-authenticator",
+                                               ua=self.headers.get("User-Agent", ""))),
+                    "<meta http-equiv='refresh' content='0;url=/'>Belépve kóddal..."
+                    .encode("utf-8"))
+            return self._html(auth.belepes_lap(hiba=True), 401)
         if p.path == "/belepes":
             # H4: kiserlet-korlat (brute-force vedelem)
             if not self._kiserlet_ok():
