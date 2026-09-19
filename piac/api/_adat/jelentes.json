@@ -1,0 +1,1251 @@
+{
+ "ido": "2026-09-19T19:40:00",
+ "sajat_termek_szam": 4348,
+ "konkurens_ar_szam": 49,
+ "kategoriak": {
+  "jarmu": {
+   "piac_n": 1,
+   "piac_min": 1590.0,
+   "piac_median": 1590.0,
+   "piac_max": 1590.0
+  },
+  "figura": {
+   "piac_n": 30,
+   "piac_min": 1590.0,
+   "piac_median": 4490.0,
+   "piac_max": 33390.0
+  },
+  "tarsasjatek": {
+   "piac_n": 3,
+   "piac_min": 9590.0,
+   "piac_median": 10890.0,
+   "piac_max": 11990.0
+  },
+  "lego": {
+   "piac_n": 10,
+   "piac_min": 1795.0,
+   "piac_median": 3790.0,
+   "piac_max": 6740.0
+  },
+  "plüss": {
+   "piac_n": 3,
+   "piac_min": 2690.0,
+   "piac_median": 2990.0,
+   "piac_max": 21390.0
+  },
+  "epitojatek": {
+   "piac_n": 1,
+   "piac_min": 3590.0,
+   "piac_median": 3590.0,
+   "piac_max": 3590.0
+  },
+  "egyeb": {
+   "piac_n": 1,
+   "piac_min": 890.0,
+   "piac_median": 890.0,
+   "piac_max": 890.0
+  }
+ },
+ "termekek": [
+  {
+   "sku": "LD7483",
+   "nev": "Little Dutch autós szőnyeg 100x140 cm - Safari Friends",
+   "ar": 9890.0,
+   "kategoria": "figura"
+  },
+  {
+   "sku": "LD8040BEIGE",
+   "nev": "Little Dutch babafotel bézs",
+   "ar": 24990.0,
+   "kategoria": "baba"
+  },
+  {
+   "sku": "DE10395031",
+   "nev": "Little Dutch fali szőnyeg - Fairy Garden",
+   "ar": 10790.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "DE10395030",
+   "nev": "Little Dutch fali szőnyeg - Forest Friends",
+   "ar": 10790.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "LD9562",
+   "nev": "Little Dutch felfűzhető elefánt- Safari Friends",
+   "ar": 1310.0,
+   "kategoria": "figura"
+  },
+  {
+   "sku": "LD9564",
+   "nev": "Little Dutch felfűzhető flamingó -  Safari Friends",
+   "ar": 1310.0,
+   "kategoria": "figura"
+  },
+  {
+   "sku": "LD9563",
+   "nev": "Little Dutch felfűzhető krokodil- Safari Friends",
+   "ar": 1310.0,
+   "kategoria": "figura"
+  },
+  {
+   "sku": "LD9561",
+   "nev": "Little Dutch felfűzhető oroszlán- Safari Friends",
+   "ar": 1310.0,
+   "kategoria": "figura"
+  },
+  {
+   "sku": "PW10294030",
+   "nev": "Little Dutch két oldalas poszter Forest Friends",
+   "ar": 3390.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "PW10244030",
+   "nev": "Little Dutch két oldalas poszter Forest Wonders",
+   "ar": 3390.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "DE10145030",
+   "nev": "Little Dutch kötött párna - róka",
+   "ar": 9790.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "DE10155031",
+   "nev": "Little Dutch kötött párna - virág",
+   "ar": 9790.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "LD8367",
+   "nev": "Little Dutch plüss flamingó faldekor - Safari Friends",
+   "ar": 7990.0,
+   "kategoria": "plüss"
+  },
+  {
+   "sku": "LD8368",
+   "nev": "Little Dutch plüss krokodil faldekor - Safari Friends",
+   "ar": 7990.0,
+   "kategoria": "plüss"
+  },
+  {
+   "sku": "LD8366",
+   "nev": "Little Dutch plüss oroszlán faldekor - Safari Friends",
+   "ar": 7990.0,
+   "kategoria": "plüss"
+  },
+  {
+   "sku": "LD8365",
+   "nev": "Little Dutch plüss zsiráf faldekor - Safari Friends",
+   "ar": 7990.0,
+   "kategoria": "plüss"
+  },
+  {
+   "sku": "DE20155031",
+   "nev": "Little Dutch textil girland - Fairy Floral",
+   "ar": 5890.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-10455-1",
+   "nev": "BABY EINSTEIN Neptune’s Ocean Discovery™ Ugráló 6 hónapos kortól 11 kg-ig",
+   "ar": 46090.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-10504-1",
+   "nev": "BABY EINSTEIN Ugráló/aktív központ 2 az 1-ben Neighborhood Symphony 6 hónapos kortól 11 kg-ig",
+   "ar": 43390.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-11710-1",
+   "nev": "BABY EINSTEIN Ugráló/aktívcentrum 2in1 Ocean Explorers Airplane Adventure™ 6hó+  12 kg-ig",
+   "ar": 43390.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-01185-60",
+   "nev": "CHICCO 3 az 1-ben Panda 12 hónapos kortól",
+   "ar": 23890.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-01105-50",
+   "nev": "CHICCO Lendületet adó egyensúlyozó Green Hopper Eco+ 18h+",
+   "ar": 23890.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-01716",
+   "nev": "CHICCO Odrážedlo Red Bullet 2-5év, 25 kg-ig",
+   "ar": 23890.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-01716-10",
+   "nev": "CHICCO Pink Arrow futóbicikli 2-5év, 25 kg-ig",
+   "ar": 23890.0,
+   "kategoria": "kismotor"
+  },
+  {
+   "sku": "AGS-13062-1",
+   "nev": "DISNEY BABY Ugráló/aktív centrum 2in1 Minnie Mouse Forever Besties 6hó+  11 kg-ig",
+   "ar": 47490.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-226213",
+   "nev": "FEEDO Gyermek ugráló - játszóközpont",
+   "ar": 39990.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-260216",
+   "nev": "FEEDO Ugráló állatka Tehén Krém",
+   "ar": 8290.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-KR2WAY25MIN0000",
+   "nev": "KINDERKRAFT 2Way Next Mint futóbicikli",
+   "ar": 16790.0,
+   "kategoria": "kismotor"
+  },
+  {
+   "sku": "AGS-KRASTO02PNKPL00",
+   "nev": "KINDERKRAFT Aston 2 Plus Rózsaszín Tricikli, 9 hónapos kortól",
+   "ar": 39990.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-KRASTO02GRYPL00",
+   "nev": "KINDERKRAFT Aston 2 Plus Szürke háromkerekű, 9 hónapos kortól",
+   "ar": 39990.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-KRASTO02GREPL00",
+   "nev": "KINDERKRAFT Aston 2 Plus Zöld Tricikli, 9 hónapos kortól",
+   "ar": 39990.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-KRAVEO02BEG0000",
+   "nev": "KINDERKRAFT Aveo 2 Plus Bézs háromkerekű",
+   "ar": 47590.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-KRAVEO02GRY0000",
+   "nev": "KINDERKRAFT Aveo 2 Plus Szürke Tricikli",
+   "ar": 47590.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-KRAVEO02GRE0000",
+   "nev": "KINDERKRAFT Aveo 2 Plus Zöld Tricikli",
+   "ar": 47590.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-KRCUFL00BLU0000",
+   "nev": "KINDERKRAFT Cutie Flash Blue futóbicikli",
+   "ar": 15990.0,
+   "kategoria": "kismotor"
+  },
+  {
+   "sku": "AGS-KRCUFL00PNK0000",
+   "nev": "KINDERKRAFT Cutie Flash Pink futóbicikli",
+   "ar": 15990.0,
+   "kategoria": "kismotor"
+  },
+  {
+   "sku": "AGS-KRCUFL00GRE0000",
+   "nev": "KINDERKRAFT Cutie Flash Zöld Gyerekbicikli",
+   "ar": 15990.0,
+   "kategoria": "kismotor"
+  },
+  {
+   "sku": "AGS-KR2WAY22BLU0000",
+   "nev": "KINDERKRAFT Futóbicikli 2way Next Blue Sky",
+   "ar": 19290.0,
+   "kategoria": "kismotor"
+  },
+  {
+   "sku": "AGS-KR2WAY22PNK0000",
+   "nev": "KINDERKRAFT Futóbicikli 2way Next Rose Pink",
+   "ar": 19290.0,
+   "kategoria": "kismotor"
+  },
+  {
+   "sku": "AGS-KRFLPL00PNK0000",
+   "nev": "KINDERKRAFT futóbicikli Fly Plus Powder pink",
+   "ar": 26090.0,
+   "kategoria": "kismotor"
+  },
+  {
+   "sku": "AGS-KRSPAC23GRE0000",
+   "nev": "KINDERKRAFT Futóbicikli Space Deep Világoszöld",
+   "ar": 21390.0,
+   "kategoria": "kismotor"
+  },
+  {
+   "sku": "AGS-KRSPAC23BLU0000",
+   "nev": "KINDERKRAFT Futóbicikli Space Mélykék",
+   "ar": 21390.0,
+   "kategoria": "kismotor"
+  },
+  {
+   "sku": "AGS-KREASY00BEG0000",
+   "nev": "KINDERKRAFT Gyerek Tricikli Easytwist Bézs",
+   "ar": 71390.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-KRJAZZ03BEG0000",
+   "nev": "KINDERKRAFT Jazz 3 háromkerekű kerékpár, bézs, 9 hónapos kortól",
+   "ar": 63590.0,
+   "kategoria": "kismotor"
+  },
+  {
+   "sku": "AGS-KRJAZZ03PNK0000",
+   "nev": "KINDERKRAFT Jazz 3 rózsaszín tricikli, 9 hónapos kortól",
+   "ar": 63590.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-KRJAZZ03GRY0000",
+   "nev": "KINDERKRAFT Jazz 3 Szürke Tricikli, 9 hónapos kortól",
+   "ar": 63590.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-KRJAZZ03GRE0000",
+   "nev": "KINDERKRAFT Jazz 3 Zöld Tricikli, 9 hónapos kortól",
+   "ar": 63590.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-KRCUTI00BEG0000",
+   "nev": "KINDERKRAFT Lökdöső Cutie Beige",
+   "ar": 15090.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-KRCUTI00PNK0000",
+   "nev": "KINDERKRAFT Lökdöső Cutie Pink",
+   "ar": 15090.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-KRHALL00WHT0000",
+   "nev": "KINDERKRAFT Lökdöső és roller 2 az 1-ben Halley Stone white",
+   "ar": 24090.0,
+   "kategoria": "kismotor"
+  },
+  {
+   "sku": "AGS-KRFLPL00MIN0000",
+   "nev": "KINDERKRAFT Lökdöső Fly Plus Fresh menta",
+   "ar": 26090.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-KRCUTI00BLU0000",
+   "nev": "KINDERKRAFT Lökős jármű Cutie Kék",
+   "ar": 15090.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-KRSPAC23PNK0000",
+   "nev": "KINDERKRAFT Odrážedlo Space Deep Dark pink",
+   "ar": 21390.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-KRRAUP00BEG0000",
+   "nev": "KINDERKRAFT Scooter Raket Up Beige",
+   "ar": 18990.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-KRRAUP00BLK0000",
+   "nev": "KINDERKRAFT Scooter Raket Up Black",
+   "ar": 18990.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-KRRAUP00BLU0000",
+   "nev": "KINDERKRAFT Scooter Raket Up Blue",
+   "ar": 18990.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-KRRAUP00PNK0000",
+   "nev": "KINDERKRAFT Scooter Raket Up Pink",
+   "ar": 18990.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-KREASY00BLK0000",
+   "nev": "KINDERKRAFT SELECT Easytwist Black, Premium háromkerekű",
+   "ar": 73490.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-KKRETWIPNK0000",
+   "nev": "KINDERKRAFT SELECT Easytwist Háromkerekű Mauvelous Pink, Premium",
+   "ar": 73490.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-KKRETWIGRE0000",
+   "nev": "KINDERKRAFT SELECT Easytwist háromkerekű Midnight Green, Premium",
+   "ar": 73490.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-KKRETWIGRY0000",
+   "nev": "KINDERKRAFT SELECT Easytwist Platinum Grey, Premium háromkerekű bicikli",
+   "ar": 73490.0,
+   "kategoria": "kismotor"
+  },
+  {
+   "sku": "AGS-KRRAPI02BLU0000",
+   "nev": "KINDERKRAFT SELECT Rapid2 Blue Breeze futóbicikli",
+   "ar": 36990.0,
+   "kategoria": "kismotor"
+  },
+  {
+   "sku": "AGS-KRTOVE00BEG0000",
+   "nev": "KINDERKRAFT Tove Desert beige futóbicikli",
+   "ar": 21390.0,
+   "kategoria": "kismotor"
+  },
+  {
+   "sku": "AGS-KRTOVE00MIN0000",
+   "nev": "KINDERKRAFT Tove Summer menta gyermek futóbicikli",
+   "ar": 21390.0,
+   "kategoria": "kismotor"
+  },
+  {
+   "sku": "AGS-KR4TRI22BLU0000",
+   "nev": "KINDERKRAFT Tricikli 4Trike Sunflower Blue",
+   "ar": 28190.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-614820",
+   "nev": "PETITE&MARS Multifunkciós 3 az 1-ben futókerékpár Bingo Dusty Rose",
+   "ar": 14990.0,
+   "kategoria": "kismotor"
+  },
+  {
+   "sku": "AGS-614929",
+   "nev": "PETITE&MARS Multifunkciós 3 az 1-ben futókerékpár Bingo Ivory White",
+   "ar": 14990.0,
+   "kategoria": "kismotor"
+  },
+  {
+   "sku": "AGS-614877",
+   "nev": "PETITE&MARS Multifunkciós 3 az 1-ben futókerékpár Bingo Sage Leaf",
+   "ar": 14990.0,
+   "kategoria": "kismotor"
+  },
+  {
+   "sku": "AGS-614837",
+   "nev": "PETITE&MARS Multifunkciós 3 az 1-ben futókerékpár Bingo Sterling Blue",
+   "ar": 14990.0,
+   "kategoria": "kismotor"
+  },
+  {
+   "sku": "AGS-617818",
+   "nev": "PETITE&MARS Multifunkciós 5 az 1-ben tricikli Turbo Plus Desert Sand",
+   "ar": 30990.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-613383",
+   "nev": "PETITE&MARS Multifunkciós 5 az 1-ben Turbo tricikli – limitált Pink Dino Park",
+   "ar": 33990.0,
+   "kategoria": "figura"
+  },
+  {
+   "sku": "AGS-613365",
+   "nev": "PETITE&MARS Multifunkciós 5 az 1-ben Turbo tricikli – limitált Pink Llama Vibes",
+   "ar": 33990.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-613364",
+   "nev": "PETITE&MARS Multifunkciós 5 az 1-ben Turbo tricikli – limitált Pink Meadow kiadás",
+   "ar": 33990.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-613359",
+   "nev": "PETITE&MARS Multifunkciós 5 az 1-ben Turbo tricikli – limitált Pink Rosy Wilderness",
+   "ar": 33990.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-618818",
+   "nev": "PETITE&MARS Multifunkciós tricikli 4in1 Drift Deser Sand",
+   "ar": 33790.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-618817",
+   "nev": "PETITE&MARS Multifunkciós tricikli 4in1 Drift Misty Green",
+   "ar": 33790.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-618830",
+   "nev": "PETITE&MARS Multifunkciós tricikli 4in1 Drift Ocean Blue",
+   "ar": 33790.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-617817",
+   "nev": "PETITE&MARS Multifunkciós tricikli 5 az 1-ben Turbo Plus Misty Green",
+   "ar": 30990.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-617830",
+   "nev": "PETITE&MARS Multifunkciós tricikli 5 az 1-ben Turbo Plus Ocean Blue",
+   "ar": 30990.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-613818",
+   "nev": "PETITE&MARS Multifunkciós tricikli 5in1 Turbo Desert Sand",
+   "ar": 27990.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-613821",
+   "nev": "PETITE&MARS Multifunkciós tricikli 5in1 Turbo Dusty Rose",
+   "ar": 27990.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-613814",
+   "nev": "PETITE&MARS Multifunkciós tricikli 5in1 Turbo Intense Ochre",
+   "ar": 27990.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-613817",
+   "nev": "PETITE&MARS Multifunkciós tricikli 5in1 Turbo Misty Green",
+   "ar": 27990.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-613830",
+   "nev": "PETITE&MARS Multifunkciós tricikli 5in1 Turbo Ocean Blue",
+   "ar": 27990.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-T70-grey",
+   "nev": "QPLAY Comfo Max Grey tricikli, 8 az 1-ben, 10-72 hónapos korig",
+   "ar": 71390.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-B90-beige",
+   "nev": "QPLAY Futóbicikli Feduro Beige, 3-6 éves korig, 30 kg-ig",
+   "ar": 22490.0,
+   "kategoria": "kismotor"
+  },
+  {
+   "sku": "AGS-B90-black-golden",
+   "nev": "QPLAY Futóbicikli Feduro Black/Golden, 3-6 éves korig, 30 kg-ig",
+   "ar": 22490.0,
+   "kategoria": "kismotor"
+  },
+  {
+   "sku": "AGS-B-100-cream",
+   "nev": "QPLAY Futóbicikli Tech Cream, 2-4 éves korig, 30 kg-ig",
+   "ar": 15990.0,
+   "kategoria": "kismotor"
+  },
+  {
+   "sku": "AGS-B-100-mint",
+   "nev": "QPLAY Futóbicikli Tech Mint, 2-4 éves korig, 30 kg-ig",
+   "ar": 15990.0,
+   "kategoria": "kismotor"
+  },
+  {
+   "sku": "AGS-B-700-2-pink",
+   "nev": "QPLAY futóbicikli Trainer Pink, kor 2-4 év",
+   "ar": 15990.0,
+   "kategoria": "kismotor"
+  },
+  {
+   "sku": "AGS-S380-10grey",
+   "nev": "QPLAY Háromkerekű Rito air gel (Gumi) Szürke, életkor 10-72 hónap",
+   "ar": 39990.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-S380-7grey",
+   "nev": "QPLAY Háromkerekű Rito eva Grey, kor 10-72 hónap",
+   "ar": 39990.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-T80-Platinum",
+   "nev": "QPLAY Háromkerekű Stager 3 az 1-ben Platina, 2-6 év",
+   "ar": 29990.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-Go-Kart-Agreen",
+   "nev": "QPLAY Négykerekű Go Kart Army Green, 3 éves kortól+",
+   "ar": 39990.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-Go-Kart-Black",
+   "nev": "QPLAY Négykerekű Go Kart Fekete, 3 éves kortól+",
+   "ar": 39990.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-S702-Grey",
+   "nev": "QPLAY Nova Deluxe 5 az 1-ben tricikli Szürke, 10-72 hónap",
+   "ar": 99690.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-S703-Beige",
+   "nev": "QPLAY Nova Max 5 az 1-ben Bézs Tricikli, 10-72 hónap",
+   "ar": 79590.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-S703-Black",
+   "nev": "QPLAY Nova Max 5 az 1-ben fekete tricikli, 10-72 hónapos korig",
+   "ar": 79590.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-ST-005-EVO-Coral-pink",
+   "nev": "QPLAY Roller / futóbicikli Sema Evo LED fényekkel Coral Pink, életkor 1 - 6 év, legfeljebb 50 kg",
+   "ar": 29990.0,
+   "kategoria": "kismotor"
+  },
+  {
+   "sku": "AGS-ST-005-EVO-Khaki",
+   "nev": "QPLAY Roller / futóbicikli Sema Evo LED fényekkel Khaki, életkor 1 - 6 év, legfeljebb 50 kg",
+   "ar": 29990.0,
+   "kategoria": "kismotor"
+  },
+  {
+   "sku": "AGS-ST-005-EVO-Violet",
+   "nev": "QPLAY Roller / futóbicikli Sema Evo LED fényekkel Lila, életkor 1 - 6 év, legfeljebb 50 kg",
+   "ar": 29990.0,
+   "kategoria": "kismotor"
+  },
+  {
+   "sku": "AGS-ST-005-EVO-Jade-Green",
+   "nev": "QPLAY Roller / futóbicikli Sema Evo LED lámpákkal Jade Green, életkor 1 - 6 év, legfeljebb 50 kg",
+   "ar": 29990.0,
+   "kategoria": "kismotor"
+  },
+  {
+   "sku": "AGS-ST-005-EVO-Sky-blue",
+   "nev": "QPLAY Roller / futóbicikli Sema Evo LED világítással Sky Blue, életkor 1 - 6 év, legfeljebb 50 kg",
+   "ar": 31990.0,
+   "kategoria": "kismotor"
+  },
+  {
+   "sku": "AGS-ST-006-Black",
+   "nev": "QPLAY Roller Sparkling Black, 3r+",
+   "ar": 19990.0,
+   "kategoria": "kismotor"
+  },
+  {
+   "sku": "AGS-ST-006-Npink",
+   "nev": "QPLAY Roller Sparkling Nude rózsaszín, 3 éves kortól",
+   "ar": 19990.0,
+   "kategoria": "kismotor"
+  },
+  {
+   "sku": "AGS-B-100black",
+   "nev": "QPLAY Tech Black futóbicikli, életkor 2 - 4 év, 30 kg-ig",
+   "ar": 15990.0,
+   "kategoria": "kismotor"
+  },
+  {
+   "sku": "AGS-B-100Red",
+   "nev": "QPLAY Tech Red futóbicikli, életkor 2 - 4 év, 30 kg-ig",
+   "ar": 15990.0,
+   "kategoria": "kismotor"
+  },
+  {
+   "sku": "AGS-S380-7black",
+   "nev": "QPLAY Tricikli  Rito eva Black,  kor 10-72 hó",
+   "ar": 39990.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-S380-10black",
+   "nev": "QPLAY Tricikli Rito air gel (Gumi) Black, kor 10-72 hó",
+   "ar": 39990.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-S380-8black",
+   "nev": "QPLAY Tricikli Rito eva plus Black, életkor 10-72 hónap",
+   "ar": 47990.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-T80-Brown",
+   "nev": "QPLAY Tricikli Stager 3 az 1-ben Barna, 2-6 év",
+   "ar": 29990.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-T80-Green",
+   "nev": "QPLAY Tricikli Stager 3 az 1-ben Zöld, 2-6 év",
+   "ar": 29990.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-T90-3-green",
+   "nev": "QPLAY Tricikli Triduro Zöld, korosztály 2-6 év",
+   "ar": 19990.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-9M814110",
+   "nev": "SKIP HOP Ugráló/Aktív központ 2 az 1-ben Silver Lining Cloud™ 4hó+",
+   "ar": 60490.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-184350",
+   "nev": "SKIP HOP Zoo ugráló 3 az 1-ben Ride-On Róka 12 hó+ 20 kg-ig",
+   "ar": 30290.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "LD4924",
+   "nev": "Little Dutch gyerek bőrönd - Safari Friends",
+   "ar": 18490.0,
+   "kategoria": "figura"
+  },
+  {
+   "sku": "LD4920",
+   "nev": "Little Dutch gyerek hátizsák  - Safari Friends",
+   "ar": 9890.0,
+   "kategoria": "figura"
+  },
+  {
+   "sku": "LD4930",
+   "nev": "Little Dutch gyerek hátizsák 35 cm- Fairies",
+   "ar": 9890.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "LD4922",
+   "nev": "Little Dutch hűtőtáska - Safari Friends",
+   "ar": 5190.0,
+   "kategoria": "figura"
+  },
+  {
+   "sku": "LD8372",
+   "nev": "Little Dutch kulcstartó elefánt - Safari Friends",
+   "ar": 2690.0,
+   "kategoria": "figura"
+  },
+  {
+   "sku": "LD8370",
+   "nev": "Little Dutch kulcstartó flamingó - Safari Friends",
+   "ar": 2690.0,
+   "kategoria": "figura"
+  },
+  {
+   "sku": "LD8371",
+   "nev": "Little Dutch kulcstartó krokodil - Safari Friends",
+   "ar": 2690.0,
+   "kategoria": "figura"
+  },
+  {
+   "sku": "LD8373",
+   "nev": "Little Dutch kulcstartó oroszlán - Safari Friends",
+   "ar": 2690.0,
+   "kategoria": "figura"
+  },
+  {
+   "sku": "LD8374",
+   "nev": "Little Dutch kulcstartó zsiráf - Safari Friends",
+   "ar": 2690.0,
+   "kategoria": "figura"
+  },
+  {
+   "sku": "LD4921",
+   "nev": "Little Dutch ovis hátizsák  - Safari Friends",
+   "ar": 7490.0,
+   "kategoria": "figura"
+  },
+  {
+   "sku": "LD4931",
+   "nev": "Little Dutch ovis hátizsák 29 cm- Fairies",
+   "ar": 7490.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "CL26039116",
+   "nev": "Little Dutch strandtörölköző Dreamy Purple Stripe - 60cm X 120cm",
+   "ar": 8390.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "CL26039112",
+   "nev": "Little Dutch strandtörölköző Ocean World Blue - 60cm X 120cm",
+   "ar": 8390.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "CL26039114",
+   "nev": "Little Dutch strandtörölköző Ocean World Brown Stripe - 60cm X 120cm",
+   "ar": 8390.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "LD4923",
+   "nev": "Little Dutch tornazsák - Safari Friends",
+   "ar": 4390.0,
+   "kategoria": "figura"
+  },
+  {
+   "sku": "STT-001247274",
+   "nev": "*BeZou Kis felfedezők szőnyeg – Safari kúszómatrac*",
+   "ar": 13790.0,
+   "kategoria": "figura"
+  },
+  {
+   "sku": "STT-001242720",
+   "nev": "*Ingenuity InLighten Bébikölcsöny Fény- és Hangélménnyel*",
+   "ar": 34390.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001252981",
+   "nev": "*Sun Valley Fa Játékív Játékokkal és Kúszószőnyeggel*",
+   "ar": 13790.0,
+   "kategoria": "epitojatek"
+  },
+  {
+   "sku": "STT-001259863",
+   "nev": "Babatámasztó párna",
+   "ar": 12390.0,
+   "kategoria": "baba"
+  },
+  {
+   "sku": "STT-001251445",
+   "nev": "Baby Einstein Kick to it 4-in-1 Bébikarosszék & Ringató",
+   "ar": 55090.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001182347",
+   "nev": "Baby Einstein Kickin’ Tune Kúszószőnyeg 4-1-ben",
+   "ar": 37890.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001214949",
+   "nev": "Baby Einstein Kíváncsi Kenguru 2-in-1",
+   "ar": 55090.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001255631",
+   "nev": "Baby Elegance Co-Glide 3-in-1 elektromos mellékágy diófahéj barna",
+   "ar": 123790.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001205160",
+   "nev": "Baby Elegance Dreamy Mellékágy – *Szülő-gyerek ágy együtt, szellős oldallal*",
+   "ar": 68790.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001173239",
+   "nev": "Babylo ABC Lépősegéd játékközponttal – rózsaszín",
+   "ar": 34390.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001204585",
+   "nev": "Babylo ABC Sétafejlesztő – Safari zöld/szürke",
+   "ar": 34390.0,
+   "kategoria": "figura"
+  },
+  {
+   "sku": "STT-001238849",
+   "nev": "Babylo Aurora Mellékágy",
+   "ar": 48190.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001244196",
+   "nev": "Babylo Easy Up bébikomp fénnyel és hanggal",
+   "ar": 27590.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001237936",
+   "nev": "Babylo Futóautó Lépősegéd fehér/piros",
+   "ar": 30990.0,
+   "kategoria": "jarmu"
+  },
+  {
+   "sku": "STT-001188576",
+   "nev": "Babylo Napidő Utazóágy fekete",
+   "ar": 27590.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001253805",
+   "nev": "Babylo Te & Én Kisbölcső Cashmere krém",
+   "ar": 34390.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-SWX8184",
+   "nev": "BABYSENSE Légzésfigyelő Babysense 1 PRO",
+   "ar": 42190.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-SWX8481",
+   "nev": "BABYSENSE Légzésfigyelő Babysense 7",
+   "ar": 49090.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001220954",
+   "nev": "BabyZee Kúszószőnyeg 180 x 120 cm – Safari állatokkal",
+   "ar": 13790.0,
+   "kategoria": "figura"
+  },
+  {
+   "sku": "STT-001249210",
+   "nev": "Badabulle Easy Baby Ringató",
+   "ar": 27590.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001260137",
+   "nev": "Bandi ágy fehér",
+   "ar": 166690.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001232386",
+   "nev": "BeZou Baby Vízvilág Kalandok – Úszó játékmatrac",
+   "ar": 3990.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001245610",
+   "nev": "BeZou Little Discoveries Memória Kúszószőnyeg szürke",
+   "ar": 27590.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001247273",
+   "nev": "Bocsis medve formájú kúszószőnyeg",
+   "ar": 20690.0,
+   "kategoria": "plüss"
+  },
+  {
+   "sku": "STT-001255104",
+   "nev": "Bright Starts Disney Babyhopser Little 'Ohana fény- és hangos ugráló",
+   "ar": 41290.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001245885",
+   "nev": "Bright Starts Disney Micimackó Ugrálóka",
+   "ar": 17190.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001213361",
+   "nev": "Bright Starts Disney Minnie Babyugráló",
+   "ar": 55090.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001160608",
+   "nev": "Bright Starts Disney Nemo-kaland kúszószőnyeg Mr. Ray játékívével",
+   "ar": 34390.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001250570",
+   "nev": "Bright Starts Dzsungel Játékos Kúszószőnyeg – Vad Ringatókdzsungel",
+   "ar": 13790.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001238241",
+   "nev": "Bright Starts Zenehúzó Elefánt Játékzene",
+   "ar": 5290.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-0018001013",
+   "nev": "Chicco Walky Talky lépegető babakocsi fénnyel és hanggal szürke",
+   "ar": 48190.0,
+   "kategoria": "baba"
+  },
+  {
+   "sku": "STT-001201416",
+   "nev": "Classic Bébimatraci 70 x 140 cm",
+   "ar": 41290.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001248181",
+   "nev": "Disney Lilo & Stitch Ölelő Plüss",
+   "ar": 3290.0,
+   "kategoria": "plüss"
+  },
+  {
+   "sku": "STT-001254162",
+   "nev": "Disney Stitch Ölelő Plüsskendő",
+   "ar": 5290.0,
+   "kategoria": "plüss"
+  },
+  {
+   "sku": "STT-001262009",
+   "nev": "Fehn Capybara Clara puha plüss takaró",
+   "ar": 8890.0,
+   "kategoria": "plüss"
+  },
+  {
+   "sku": "STT-001262110",
+   "nev": "Fehn Musselin-Capybara Clara ölelő szorongatni való muszlinpelenka",
+   "ar": 8990.0,
+   "kategoria": "baba"
+  },
+  {
+   "sku": "STT-001252034",
+   "nev": "Fehn Ölelőmackó Lajhár",
+   "ar": 4590.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001239307",
+   "nev": "Fehn Otter-Teddy Theo szorongató plüsskendő",
+   "ar": 6490.0,
+   "kategoria": "plüss"
+  },
+  {
+   "sku": "STT-001239306",
+   "nev": "Fehn Otter-Teo Ölelőhaláska",
+   "ar": 3290.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001199586",
+   "nev": "Fehn Tengeri Kincsek Csillaghal – Alvózenélő",
+   "ar": 5290.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001218432",
+   "nev": "fehnNATUR Ölelő Kistörök vagy Ölelő Kistapsi (Eszel/Teddy változat)",
+   "ar": 6590.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001255290",
+   "nev": "Fisher-Price Balanced Beginnings kúszószőnyeg",
+   "ar": 11690.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001226540",
+   "nev": "Graco Elektromos Bébihinta Lovin Hug &quot;Into the Wild&quot; kék",
+   "ar": 55090.0,
+   "kategoria": "outdoor"
+  },
+  {
+   "sku": "STT-001170701",
+   "nev": "Hasrafejtő játékpárna ragadós játékokkal",
+   "ar": 10390.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001252718",
+   "nev": "Hauck Travel & Play Utazóágy N+ PLAY GO Állatos olíva",
+   "ar": 20690.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001224121",
+   "nev": "Infantino 3-in-1 Zene- és Csillagvető Bébimobil Rózsaszín",
+   "ar": 10390.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001251730",
+   "nev": "Infantino Cuddle & Teethe Ölelő & Nyugtató Készlet",
+   "ar": 4590.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001236804",
+   "nev": "Infantino Ocean Gym – Tengeralatti Kalandok Kúszószőnyege",
+   "ar": 10390.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001200022",
+   "nev": "Ingenuity hordozható babahinta - Cuddle Lamb",
+   "ar": 41290.0,
+   "kategoria": "baba"
+  },
+  {
+   "sku": "STT-001209611",
+   "nev": "Ingenuity Swell Elektromos Bébihinta Szürke",
+   "ar": 61890.0,
+   "kategoria": "outdoor"
+  },
+  {
+   "sku": "STT-001246258",
+   "nev": "Joie Emeri 2-in-1 Bébikoktél",
+   "ar": 89490.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001201414",
+   "nev": "Julius Zöllner Babymatrac 70 x 140 cm Airlite Fly Kaltschaum",
+   "ar": 68790.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001229781",
+   "nev": "Julius Zöllner Babymatrac 70 x 140 cm Basic",
+   "ar": 34390.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001216163",
+   "nev": "Julius Zöllner Babymatrac Classic 60 x 120 cm",
+   "ar": 37890.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-0018000785",
+   "nev": "Julius Zöllner utazó babamatraci 60 x 120 cm Rollmatratze",
+   "ar": 27590.0,
+   "kategoria": "baba"
+  },
+  {
+   "sku": "STT-001240682",
+   "nev": "miniuno HexiPén Plus hatoldalú járóka",
+   "ar": 34390.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001226492",
+   "nev": "MiniUno Sleepeasy 3-in-1 Utazóágy",
+   "ar": 30990.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-0018050993",
+   "nev": "My First NICI Szorongatni való szett",
+   "ar": 9690.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001244847",
+   "nev": "Nested Noa Baby Ringató",
+   "ar": 34390.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-0018039538",
+   "nev": "roba babaágy növekvő zsiráffal fehér/szürke/piros",
+   "ar": 116990.0,
+   "kategoria": "baba"
+  },
+  {
+   "sku": "STT-001254950",
+   "nev": "roba Krabbelbarát Szőnyeg – Savanna Barátok",
+   "ar": 13790.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001251274",
+   "nev": "roba Mitwachsendes Babybett inkl. Zubehör bézs",
+   "ar": 130690.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001217839",
+   "nev": "roba Utazómatrac 60 x 120 cm – Kék, összecsukható",
+   "ar": 13790.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001216955",
+   "nev": "Sorrento fából készült, növő gyerekágy, fehér",
+   "ar": 75690.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001259350",
+   "nev": "Színes kültéri-beltéri kúszószőnyeg",
+   "ar": 24090.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001251728",
+   "nev": "Tim Betti Búvócső (Himmelstange Tim)",
+   "ar": 6590.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "STT-001253813",
+   "nev": "Travellite 3in1 Utazóágy & Gyermekágy",
+   "ar": 20690.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-072-01-BO",
+   "nev": "BABYONO Univerzális babakocsi háló - fekete",
+   "ar": 2190.0,
+   "kategoria": "baba"
+  },
+  {
+   "sku": "AGS-597-BO",
+   "nev": "BABYONO Szülés utáni betétek Comfort 10 db",
+   "ar": 1290.0,
+   "kategoria": "egyeb"
+  },
+  {
+   "sku": "AGS-599-BO",
+   "nev": "BABYONO Szülés utáni betétek Night&Day 10 db",
+   "ar": 1490.0,
+   "kategoria": "egyeb"
+  }
+ ]
+}

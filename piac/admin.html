@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin — Piaci Ár-elemző Platform</title>
+<style>
+  :root{--bg:#0b1120;--kartya:#111c33;--szegely:#1e2f4d;--szoveg:#e6eefc;
+        --halvany:#8ba3c7;--zold:#34d399;--sarga:#fbbf24;--piros:#f87171;--kek:#60a5fa}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--szoveg);
+       font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:20px}
+  .fej{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+  h1{margin:0;font-size:23px}
+  .nav a{color:var(--halvany);text-decoration:none;margin-left:12px;font-size:13px;padding:6px 12px;
+         border:1px solid var(--szegely);border-radius:8px}
+  .blokk{background:var(--kartya);border:1px solid var(--szegely);border-radius:12px;padding:20px;margin:18px 0}
+  .blokk h2{margin:0 0 6px;font-size:17px}
+  .blokk .leiras{color:var(--halvany);font-size:13px;margin-bottom:16px;line-height:1.6}
+  label{display:block;color:var(--halvany);font-size:12px;text-transform:uppercase;
+        letter-spacing:.5px;margin:12px 0 5px}
+  input,select{width:100%;padding:11px 13px;background:#0e1830;border:1px solid var(--szegely);
+        color:var(--szoveg);border-radius:9px;font-size:14px}
+  input:focus,select:focus{outline:none;border-color:var(--kek)}
+  .sor{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  button{margin-top:16px;background:var(--kek);color:#04121f;border:none;padding:12px 22px;
+         border-radius:9px;font-size:14px;font-weight:700;cursor:pointer}
+  button:hover{filter:brightness(1.1)}
+  button:disabled{opacity:.5;cursor:wait}
+  #eredmeny{margin-top:18px;background:#0a1428;border:1px solid var(--szegely);border-radius:10px;
+            padding:16px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;
+            line-height:1.75;white-space:pre-wrap;display:none;max-height:420px;overflow:auto}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
+  th{text-align:left;color:var(--halvany);font-weight:600;font-size:11px;text-transform:uppercase;
+     letter-spacing:.5px;padding:8px 6px;border-bottom:1px solid var(--szegely)}
+  td{padding:9px 6px;border-bottom:1px solid rgba(30,47,77,.55)}
+  .tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;font-weight:600}
+  .ures{color:var(--halvany);font-size:13px;padding:12px;text-align:center}
+</style>
+</head>
+<body>
+  <div class="fej">
+    <h1>⚙️ Admin — konkurens kezelés</h1>
+    <div class="nav">
+      <a href="/">főoldal</a><a href="/ko">Kockaország</a><a href="/md">MiniDreams</a>
+    </div>
+  </div>
+
+  <div class="blokk">
+    <h2>➕ Új konkurens felvétele</h2>
+    <div class="leiras">
+      Írd be a konkurens weboldalának címét. A rendszer <b>megméri</b> az oldalt
+      (WAF-azonosítás, sitemap, JSON-LD), és kiválasztja a legolcsóbb működő gyűjtőt.
+      Nem tippel — mér.
+    </div>
+    <div class="sor">
+      <div>
+        <label>Konkurens URL</label>
+        <input id="url" placeholder="https://www.pelda.hu/" autocomplete="off">
+      </div>
+      <div>
+        <label>Terület</label>
+        <select id="terulet"><option value="ko">🏰 Kockaország</option>
+          <option value="md">🧸 MiniDreams</option></select>
+      </div>
+    </div>
+    <label>Megnevezés (opcionális)</label>
+    <input id="nev" placeholder="pl. Játék Bolygó" autocomplete="off">
+    <button id="gomb" onclick="felismer()">🔍 Felismerés és felvétel</button>
+    <div id="eredmeny"></div>
+  </div>
+
+  <div class="blokk">
+    <h2>📋 Felvett konkurensek</h2>
+    <div id="lista"><div class="ures">betöltés…</div></div>
+  </div>
+
+  <div class="blokk">
+    <h2>🧾 Futás-napló</h2>
+    <div id="naplo"><div class="ures">még nincs futás</div></div>
+  </div>
+
+<script>
+async function felismer(){
+  const url = document.getElementById('url').value.trim();
+  const terulet = document.getElementById('terulet').value;
+  const nev = document.getElementById('nev').value.trim();
+  if(!url){ alert('Adj meg egy URL-t!'); return; }
+  const g = document.getElementById('gomb'), e = document.getElementById('eredmeny');
+  g.disabled = true; g.textContent = '⏳ mérés folyamatban…';
+  e.style.display='block'; e.textContent = 'Mérés indul: '+url+'\n(WAF, sitemap, JSON-LD vizsgálat…)\n';
+  try{
+    const r = await fetch('/api/felismer',{method:'POST',headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({url, terulet, nev})});
+    const d = await r.json();
+    if(d.hiba){ e.textContent += '\n❌ HIBA: '+d.hiba; }
+    else{
+      const x = d.eredmeny;
+      e.textContent += '\n── MÉRÉS EREDMÉNYE ──\n'
+        + 'HTTP: '+x.http+'   méret: '+x.meret+' B   idő: '+x.valaszido+' s\n'
+        + 'WAF: '+(x.waf&&x.waf.length?x.waf.join(', '):'nincs felismerhető')+'\n'
+        + 'fal/kapu-oldal: '+(x.fal?'IGEN':'nem')+'\n'
+        + 'JSON-LD Product: '+(x.jsonld&&x.jsonld.van?'van':'nincs')+'\n'
+        + 'sitemap: '+(x.sitemap&&x.sitemap.sitemap?x.sitemap.sitemap+' ('+x.sitemap.loc_szam+' URL)':'nem elérhető')+'\n'
+        + '\n✅ KIVÁLASZTOTT GYŰJTŐ: '+x.gyujto+'\n   '+x.indok+'\n'
+        + '\n✔ elmentve a konkurens-listába';
+      listatolt();
+    }
+  }catch(err){ e.textContent += '\n❌ Hálózati hiba: '+err.message; }
+  g.disabled = false; g.textContent = '🔍 Felismerés és felvétel';
+}
+
+async function listatolt(){
+  const r = await fetch('/api/konkurensek?terulet=ko');
+  const kk = await r.json();
+  const r2 = await fetch('/api/konkurensek?terulet=md');
+  const mm = await r2.json();
+  const mind = [...(kk.konkurensek||[]), ...(mm.konkurensek||[])];
+  const el = document.getElementById('lista');
+  if(!mind.length){ el.innerHTML='<div class="ures">még nincs konkurens felvéve</div>'; return; }
+  el.innerHTML = `<table><tr><th>Terület</th><th>Név</th><th>URL</th><th>Típus</th>
+    <th>Gyűjtő</th><th>Állapot</th><th>Sitemap</th></tr>` +
+    mind.map(x=>`<tr>
+      <td>${x.terulet_id==1?'🏰 KO':'🧸 MD'}</td>
+      <td><b>${x.nev}</b></td>
+      <td style="color:#8ba3c7;font-size:11px">${x.url}</td>
+      <td>${x.tipus||'—'}</td>
+      <td><span class="tag" style="background:rgba(96,165,250,.15);color:#60a5fa">${x.gyujto||'—'}</span></td>
+      <td><span class="tag" style="background:${x.utolso_status==='ok'?'rgba(52,211,153,.15)':'rgba(248,113,113,.15)'};
+        color:${x.utolso_status==='ok'?'#34d399':'#f87171'}">${x.utolso_status||'soha'}</span></td>
+      <td style="font-size:11px;color:#8ba3c7">${x.sitemap_url?'van':'nincs'}</td></tr>`).join('') + '</table>';
+}
+
+async function naploTolt(){
+  const r = await fetch('/api/futasok'); const d = await r.json();
+  const el = document.getElementById('naplo');
+  if(!d.futasok || !d.futasok.length){ el.innerHTML='<div class="ures">még nincs futás</div>'; return; }
+  el.innerHTML = `<table><tr><th>Idő</th><th>Gyűjtő</th><th>Státusz</th><th>Talált</th><th>Párosult</th></tr>` +
+    d.futasok.map(x=>`<tr><td>${x.kezd||'—'}</td><td>${x.gyujto||'—'}</td>
+      <td>${x.status||'—'}</td><td>${x.talalt||0}</td><td>${x.parosult||0}</td></tr>`).join('') + '</table>';
+}
+listatolt(); naploTolt();
+</script>
+</body>
+</html>

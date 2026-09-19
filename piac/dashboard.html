@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Élő dashboard — Piaci Ár-elemző</title>
+<style>
+  :root{--bg:#0b1120;--kartya:#111c33;--szegely:#1e2f4d;--szoveg:#e6eefc;
+        --halvany:#8ba3c7;--zold:#34d399;--sarga:#fbbf24;--piros:#f87171;--kek:#60a5fa}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--szoveg);
+       font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:20px}
+  .fej{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+  h1{margin:0;font-size:23px}
+  .nav a{color:var(--halvany);text-decoration:none;margin-left:14px;font-size:13px;padding:6px 12px;
+         border:1px solid var(--szegely);border-radius:8px}
+  .nav a.aktiv{color:var(--szoveg);border-color:var(--kek);background:rgba(96,165,250,.12)}
+  .allapot{display:flex;align-items:center;gap:8px;color:var(--halvany);font-size:13px;margin:14px 0 20px}
+  .pont{width:9px;height:9px;border-radius:50%;background:var(--zold);animation:pulzus 2s infinite}
+  @keyframes pulzus{0%{box-shadow:0 0 0 0 rgba(52,211,153,.6)}
+                    70%{box-shadow:0 0 0 9px rgba(52,211,153,0)}100%{box-shadow:0 0 0 0 rgba(52,211,153,0)}}
+  .kpi-racs{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:22px}
+  .kpi{background:var(--kartya);border:1px solid var(--szegely);border-radius:12px;padding:16px}
+  .kpi .cimke{color:var(--halvany);font-size:12px;text-transform:uppercase;letter-spacing:.6px}
+  .kpi .ertek{font-size:28px;font-weight:700;margin-top:6px}
+  .kpi .megj{color:var(--halvany);font-size:12px;margin-top:2px}
+  .zold-sz{color:var(--zold)} .piros-sz{color:var(--piros)} .sarga-sz{color:var(--sarga)}
+  .blokk{background:var(--kartya);border:1px solid var(--szegely);border-radius:12px;
+         padding:18px;margin-bottom:18px}
+  .blokk h2{margin:0 0 14px;font-size:16px;color:var(--halvany);text-transform:uppercase;letter-spacing:.6px}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{text-align:left;color:var(--halvany);font-weight:600;font-size:11px;text-transform:uppercase;
+     letter-spacing:.5px;padding:8px 6px;border-bottom:1px solid var(--szegely)}
+  td{padding:9px 6px;border-bottom:1px solid rgba(30,47,77,.55)}
+  tr:hover td{background:rgba(96,165,250,.05)}
+  .ures{color:var(--halvany);font-size:13px;padding:14px;text-align:center;line-height:1.7}
+  .gomb{background:rgba(96,165,250,.15);color:var(--kek);border:1px solid var(--kek);
+        padding:6px 12px;border-radius:7px;font-size:12px;cursor:pointer;font-weight:600}
+  .gomb:hover{background:rgba(96,165,250,.28)}
+  .tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;font-weight:600}
+</style>
+</head>
+<body>
+  <div class="fej">
+    <h1 id="cim">⏳ Betöltés…</h1>
+    <div class="nav">
+      <a href="/">főoldal</a>
+      <a href="/ko" id="n-ko">Kockaország</a>
+      <a href="/md" id="n-md">MiniDreams</a>
+      <a href="/admin">admin</a>
+    </div>
+  </div>
+  <div class="allapot"><span class="pont"></span>
+    <span id="frissites">utolsó frissítés: —</span>
+    <span style="color:#4a5d7a">| automatikus 30 mp</span></div>
+
+  <div class="kpi-racs" id="kpi-racs"></div>
+
+  <div class="blokk">
+    <h2>Top ár-eltérések (mi vs. konkurens)</h2>
+    <div id="top-elteres"><div class="ures">nincs még mérési adat</div></div>
+  </div>
+
+  <div class="blokk">
+    <h2>Figyelt konkurensek</h2>
+    <div id="konkurens-lista"><div class="ures">nincs még konkurens felvéve — az admin felületen tudsz URL-t bedobni</div></div>
+  </div>
+
+  <div class="blokk">
+    <h2>Termék-tábla</h2>
+    <input id="szuro" placeholder="szűrés cikkszámra vagy névre…"
+      style="width:100%;padding:9px 12px;background:#0e1830;border:1px solid var(--szegely);
+             color:var(--szoveg);border-radius:8px;margin-bottom:12px;font-size:13px">
+    <div id="termek-tabla"><div class="ures">nincs még termék-adat</div></div>
+  </div>
+
+<script>
+const SLUG = location.pathname.indexOf('/md')===0 ? 'md' : 'ko';
+const NEV  = SLUG==='md' ? '🧸 MiniDreams' : '🏰 Kockaország';
+document.getElementById('cim').textContent = '📊 ' + NEV + ' — élő dashboard';
+document.getElementById('n-'+SLUG).classList.add('aktiv');
+document.title = NEV + ' — élő dashboard';
+
+const ft = n => (n==null?'—':new Intl.NumberFormat('hu-HU').format(Math.round(n))+' Ft');
+const szin = n => n==null ? '' : (n>0?'piros-sz':n<0?'zold-sz':'');
+
+async function betolt(){
+  try{
+    const k = await (await fetch('/api/kpi?terulet='+SLUG)).json();
+    document.getElementById('kpi-racs').innerHTML = `
+      <div class="kpi"><div class="cimke">Saját termék</div>
+        <div class="ertek">${k.sajat_termek}</div><div class="megj">aktív</div></div>
+      <div class="kpi"><div class="cimke">Konkurens</div>
+        <div class="ertek">${k.konkurens}</div><div class="megj">figyelt</div></div>
+      <div class="kpi"><div class="cimke">Párosult</div>
+        <div class="ertek">${k.parosult}</div><div class="megj">${k.konkurens_ar} mérés</div></div>
+      <div class="kpi"><div class="cimke">Olcsóbbak</div>
+        <div class="ertek zold-sz">${k.olcsobb}</div><div class="megj">termékben</div></div>
+      <div class="kpi"><div class="cimke">Drágábbak</div>
+        <div class="ertek piros-sz">${k.dragabb}</div><div class="megj">termékben</div></div>
+      <div class="kpi"><div class="cimke">Utolsó mérés</div>
+        <div class="ertek" style="font-size:15px">${k.utolso_meres?k.utolso_meres.slice(0,16).replace('T',' '):'—'}</div>
+        <div class="megj">időpont</div></div>`;
+    document.getElementById('frissites').textContent =
+      'utolsó frissítés: ' + new Date().toLocaleTimeString('hu-HU');
+
+    const kk = await (await fetch('/api/konkurensek?terulet='+SLUG)).json();
+    const kl = document.getElementById('konkurens-lista');
+    if(kk.konkurensek && kk.konkurensek.length){
+      kl.innerHTML = `<table><tr><th>Név</th><th>URL</th><th>Típus</th>
+        <th>Gyűjtő</th><th>Állapot</th><th>Párosult</th><th>Utolsó futás</th></tr>` +
+        kk.konkurensek.map(x=>`<tr>
+          <td><b>${x.nev}</b></td>
+          <td style="color:#8ba3c7;font-size:11px">${x.url}</td>
+          <td>${x.tipus||'—'}</td>
+          <td><span class="tag" style="background:rgba(96,165,250,.15);color:#60a5fa">${x.gyujto||'—'}</span></td>
+          <td><span class="tag" style="background:${x.utolso_status==='ok'?'rgba(52,211,153,.15)':'rgba(248,113,113,.15)'};
+            color:${x.utolso_status==='ok'?'#34d399':'#f87171'}">${x.utolso_status||'soha'}</span></td>
+          <td>${x.talalatok||0}</td>
+          <td style="font-size:11px">${x.utolso_futas||'—'}</td></tr>`).join('') + '</table>';
+    }
+
+    const tt = await (await fetch('/api/termekek?terulet='+SLUG)).json();
+    const tb = document.getElementById('termek-tabla');
+    const sorok = (tt.termekek||[]).filter(x=>x.elteres!=null)
+       .sort((a,b)=>Math.abs(b.elteres)-Math.abs(a.elteres));
+    if(sorok.length){
+      tb.innerHTML = `<table><tr><th>Cikkszám</th><th>Név</th><th>Mi árunk</th>
+        <th>Konkurens</th><th>Eltérés</th><th>%</th><th>Pont</th></tr>` +
+        sorok.slice(0,60).map(x=>`<tr>
+          <td><b>${x.sku}</b></td>
+          <td style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${x.nev||''}</td>
+          <td>${ft(x.sajat_ar)}</td><td>${ft(x.verseny_ar)}</td>
+          <td class="${szin(x.elteres)}"><b>${ft(x.elteres)}</b></td>
+          <td class="${szin(x.elteres)}">${x.elteres_szazalek}%</td>
+          <td>${x.pont!=null?(x.pont*100).toFixed(0)+'%':'—'}</td></tr>`).join('') + '</table>';
+      document.getElementById('top-elteres').innerHTML =
+        `<table><tr><th>Cikkszám</th><th>Név</th><th>Mi</th><th>Konkurens</th><th>Eltérés</th></tr>` +
+        sorok.slice(0,15).map(x=>`<tr><td><b>${x.sku}</b></td>
+          <td style="max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${x.nev||''}</td>
+          <td>${ft(x.sajat_ar)}</td><td>${ft(x.verseny_ar)}</td>
+          <td class="${szin(x.elteres)}"><b>${ft(x.elteres)}</b></td></tr>`).join('') + '</table>';
+    } else {
+      tb.innerHTML = '<div class="ures">nincs még párosított mérés — vegyél fel konkurenst az admin felületen, majd indíts gyűjtést</div>';
+    }
+  }catch(e){
+    document.getElementById('frissites').textContent = 'hiba: '+e.message;
+  }
+}
+document.getElementById('szuro').addEventListener('input', e=>{
+  const s = e.target.value.toLowerCase();
+  document.querySelectorAll('#termek-tabla tbody tr, #termek-tabla tr').forEach(tr=>{
+    if(tr.querySelector('th')) return;
+    tr.style.display = tr.textContent.toLowerCase().includes(s) ? '' : 'none';
+  });
+});
+betolt(); setInterval(betolt, 30000);
+</script>
+</body>
+</html>
