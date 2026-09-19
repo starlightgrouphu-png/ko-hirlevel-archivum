@@ -1,9 +1,8 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "version": 2,
-  "name": "piaci-ar-elemzo",
-  "public": false,
-  "regions": ["fra1"],
+  "cleanUrls": true,
+  "trailingSlash": false,
   "headers": [
     {
       "source": "/(.*)",
@@ -17,12 +16,7 @@
     },
     {
       "source": "/api/(.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "no-store, max-age=0" }
-      ]
+      "headers": [ { "key": "Cache-Control", "value": "no-store, max-age=0" } ]
     }
-  ],
-  "redirects": [
-    { "source": "/dashboard", "destination": "/", "permanent": false }
   ]
 }
