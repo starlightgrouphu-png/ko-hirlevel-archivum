@@ -50,7 +50,11 @@ _ENGEDETT_IPK = frozenset({
     "10.255.255.254",            # WSL belső
     "172.17.0.1", "172.18.0.1", "172.21.0.1",   # docker-hidak
     "172.23.231.239",            # WSL helyi hálózat (a saját eth0-nk)
-    "100.88.3.101",              # Tailscale (a MI /32 címünk)
+    "100.88.3.101",              # Tailscale: marveen-pc-1 (a WSL-ünk)
+    "100.69.155.100",            # Tailscale: starlight-noti (FERENC laptopja)
+    "100.119.226.104",           # Tailscale: xiaomi-14t-pro (FERENC telefonja)
+    "100.67.6.120",              # Tailscale: marveen-pc (a WINDOWS-HOST cime —
+                                 # ezen jon a sajat gepunkrol a tailnet-keres!)
 })
 _ENGEDETT_HALOZATOK = ("127.", "10.255.255.", "172.17.", "172.18.",
                        "172.21.", "172.23.231.", "100.88.3.101")
@@ -64,9 +68,12 @@ def _ip_engedett(ip):
     if ip in _ENGEDETT_IPK:
         return True
     # a saját tailnet-címünk pontosan (100.88.3.101) — NEM a teljes /24
+    # a Tailscale-címek CSAK pontosan (a tailnet többi gépe NE jöhessen)
+    if ip.startswith("100."):
+        return ip in _ENGEDETT_IPK
+    # a helyi hálózat (WSL + docker + Windows-host) prefixről
     return ip.startswith(("127.", "10.255.255.", "172.17.", "172.18.",
-                          "172.21.", "172.23."))   # 172.23. = a WSL hálózat
-                                                       # (a Windows-host is innen jön)
+                          "172.21.", "172.23."))
 
 
 PORT = int(os.getenv("PIAC_PORT", "8100"))
