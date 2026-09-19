@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hírlevél — Kockaország</title>
+<meta name="robots" content="index, follow">
+<link rel="icon" href="/ko-logo-color-tight.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/ko-kozos.css">
+<link rel="stylesheet" href="/ko-archivum.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap fejlec">
+    <a class="logo" href="/">
+      <img src="/ko-logo-color-tight.svg" alt="Kockaország — Játékbolt és Élménysziget">
+      <span class="valaszto"></span>
+      <span class="felirat">
+        <b>Hírlevél-archívum</b>
+        <span>Élménysziget és Játékbolt</span>
+      </span>
+    </a>
+    <nav>
+      <a href="/">Archívum</a>
+      <a href="/feliratkozas">Feliratkozás</a>
+      <a class="ki" href="https://kockaorszag.hu/akciok" target="_blank" rel="noopener">Akciók →</a>
+    </nav>
+  </div>
+</header>
+
+<div class="sav">
+  <div class="wrap">
+    <div>
+      <h1 id="cim">Hírlevél betöltése…</h1>
+      <div class="meta" id="meta"></div>
+    </div>
+    <div id="allapot"></div>
+  </div>
+</div>
+
+<main class="wrap">
+  <a class="vissza" href="/">← Vissza az archívumhoz</a>
+
+  <div class="level-keret">
+    <iframe id="level" title="Hírlevél tartalma"
+            sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe>
+  </div>
+
+  <div class="cta-sav">
+    <h3>Nem vagy még feliratkozva?</h3>
+    <p>Heti játéktippek szülőknek + 5% kedvezmény az első vásárlásodhoz.</p>
+    <a class="btn" href="/feliratkozas">Feliratkozom a hírlevélre</a>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="marka">
+      <img src="/ko-logo-color-tight.svg" alt="Kockaország">
+      <a href="https://kockaorszag.hu" target="_blank" rel="noopener"><strong>Kockaorszag.hu</strong> — Élménysziget és Játékbolt</a>
+    </span>
+    <span>
+      <a href="https://kockaorszag.hu/shop_help.php?tab=privacy_policy" target="_blank" rel="noopener">Adatvédelem</a> ·
+      <a href="mailto:ugyfelszolgalat@kockaorszag.hu">ugyfelszolgalat@kockaorszag.hu</a>
+    </span>
+  </div>
+</footer>
+
+<script src="/level.js"></script>
+</body>
+</html>

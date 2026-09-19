@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Feliratkozás a hírlevélre — Kockaország</title>
+<meta name="description" content="Iratkozz fel a Kockaország hírlevélre: korosztályos játéktippek, szezonális ajánlatok, és 5% kedvezmény az első vásárlásodhoz.">
+<meta name="theme-color" content="#2aace2">
+<link rel="canonical" href="https://ko-hirlevel-archivum.vercel.app/feliratkozas">
+<meta property="og:title" content="Feliratkozás a hírlevélre — Kockaország">
+<meta property="og:description" content="Korosztályos játéktippek és szezonális ajánlatok — plusz 5% az első vásárlásodból.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ko-hirlevel-archivum.vercel.app/feliratkozas">
+<link rel="icon" href="/ko-logo-color-tight.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/ko-logo-color-tight.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/ko-kozos.css">
+<link rel="stylesheet" href="/ko-archivum.css">
+<style>
+  /* ── csak ezen az oldalon: a MailerLite űrlap doboza ── */
+  .urlap-doboz{
+    background:var(--feher);border:1px solid var(--vonal);border-radius:18px;
+    padding:30px;box-shadow:var(--arnyek);margin-top:8px;
+  }
+  .urlap-doboz h2{font-size:20px;font-weight:800;margin-bottom:6px}
+  .urlap-doboz .alcim{font-size:14.5px;color:var(--tinta-2);margin:0 0 20px}
+
+  /* a MailerLite űrlap mezőinek ráncfelvarrása (a saját osztályait nem bántjuk) */
+  #ml-beagyazas input[type=email],#ml-beagyazas input[type=text]{
+    width:100%!important;padding:14px 16px!important;border:1.5px solid var(--vonal-2)!important;
+    border-radius:12px!important;font-family:inherit!important;font-size:15.5px!important;
+    color:var(--tinta)!important;background:var(--feher)!important;margin-bottom:12px!important;
+  }
+  #ml-beagyazas input:focus{outline:0!important;border-color:var(--lila)!important;
+    box-shadow:0 0 0 3px rgba(123,79,201,.14)!important}
+  #ml-beagyazas button,#ml-beagyazas input[type=submit]{
+    width:100%!important;padding:14px 26px!important;border:0!important;border-radius:999px!important;
+    background:var(--grad)!important;color:#fff!important;font-family:inherit!important;
+    font-size:15.5px!important;font-weight:700!important;cursor:pointer!important;
+    box-shadow:0 8px 22px rgba(123,79,201,.28)!important;
+  }
+  #ml-beagyazas label{font-size:14px!important;color:var(--tinta-2)!important;font-weight:600!important}
+  #ml-beagyazas .ml-form-embedSubmit{background:transparent!important;border:0!important}
+
+  .ml-tartalek{
+    margin-top:16px;padding:14px 16px;background:#fff8f2;border:1px solid #f6ddc4;
+    border-radius:12px;font-size:14px;color:#7a5a2e;
+  }
+  .ml-tartalek a{font-weight:700;text-decoration:underline}
+
+  .gdpr{margin:22px 0 0;font-size:13px;color:var(--tinta-3);line-height:1.6}
+  .bizalom{display:flex;gap:18px;flex-wrap:wrap;margin-top:20px;padding-top:18px;
+    border-top:1px solid var(--vonal);font-size:13.5px;color:var(--tinta-2);font-weight:600}
+
+  /* ── két hasáb: bal az űrlap, jobb a bizalom-építő ── */
+  .racs{display:grid;grid-template-columns:1.05fr .95fr;gap:32px;align-items:start;margin-top:40px}
+  @media(max-width:900px){.racs{grid-template-columns:1fr;gap:24px;margin-top:28px}}
+
+  .elonyok{display:flex;flex-direction:column;gap:16px}
+  .elony{display:flex;gap:13px;align-items:flex-start}
+  .elony .ikon{font-size:19px;line-height:1.35;flex:0 0 auto}
+  .elony strong{display:block;font-size:15px;font-weight:700}
+  .elony span{font-size:14px;color:var(--tinta-2)}
+
+  .hero{margin:44px 0 0}
+  .hero p{font-size:17px;color:var(--tinta-2);max-width:640px;margin:16px 0 0}
+  .hero .szem{padding-left:9px;border-left:3px solid var(--zold);margin-top:18px;
+    font-size:14.5px;color:#12794a;font-weight:600}
+
+  .kupon-jel{
+    display:inline-flex;align-items:center;gap:10px;margin-top:20px;padding:12px 18px;
+    border:2px dashed var(--lila);border-radius:14px;background:#faf7ff;
+  }
+  .kupon-jel .kod{font-weight:800;font-size:19px;letter-spacing:1.5px;color:var(--lila)}
+  .kupon-jel .cimke{font-size:12px;text-transform:uppercase;letter-spacing:.6px;color:var(--tinta-3)}
+
+  footer.ko-lab{margin-top:72px}
+</style>
+</head>
+<body>
+
+<header class="ko-fej">
+  <div class="wrap">
+    <a class="ko-logo" href="/">
+      <img src="/ko-logo-color-tight.svg" alt="Kockaország — Élménysziget és Játékbolt">
+      <span class="valaszto"></span>
+      <span class="nev"><b>Hírlevél-archívum</b><span>Kockaország</span></span>
+    </a>
+    <nav class="ko-nav">
+      <a class="navlink" href="/">Archívum</a>
+      <a class="navlink aktiv" href="/feliratkozas">Feliratkozás</a>
+      <a class="ko-gomb ko-gomb-elso" href="https://kockaorszag.hu/akciok" target="_blank" rel="noopener">Akciók →</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="hero szük">
+    <div class="ko-alcim">Kockaország hírlevél</div>
+    <h1 class="ko-h1" style="margin-top:10px">Játéktippek, amik <span class="grad-szoveg">tényleg bejönnek</span></h1>
+    <p>Hetente egyszer küldünk egy levelet: korosztályos ajánlások, szezonális ötletek és
+       feliratkozói előnyök — hogy ne kelljen a végtelen webshop-kínálatban keresgélned.</p>
+    <div class="szem">Első vásárlásodnál 5% kedvezmény jár a megerősítésért.</div>
+  </div>
+
+  <div class="racs">
+
+    <!-- ══════ BAL: az élő MailerLite űrlap ══════ -->
+    <div class="urlap-doboz">
+      <h2>Feliratkozom</h2>
+      <p class="alcim">Add meg az e-mail-címed — egy megerősítő levelet küldünk.</p>
+
+      <!-- MailerLite beagyazas (HIVATALOS embed-kod a dashboardrol) -->
+      <div id="ml-beagyazas">
+        <div class="ml-embedded" data-form="vmxiHa"></div>
+      </div>
+
+      <div class="ml-tartalek" id="ml-tartalek">
+        <strong>Ha az űrlap nem tölt be</strong>,
+        <a id="ml-link" href="https://preview.mailerlite.io/forms/2521452/198607723660575914/share"
+           target="_blank" rel="noopener">kattints ide a feliratkozáshoz</a> —
+        a megerősítő oldal mindig elérhető.
+      </div>
+
+      <p class="gdpr">A feliratkozással elfogadod, hogy hírlevelet küldünk neked.
+         Bármikor leiratkozhatsz egy kattintással. Adataidat az
+         <a href="https://kockaorszag.hu/adatkezelesi-tajekoztato">adatkezelési tájékoztató</a>
+         szerint kezeljük. Dupla megerősítés (double opt-in) — a feliratkozás csak
+         a megerősítő e-mail után válik aktívvá.</p>
+
+      <div class="bizalom">
+        <span>🔒 Nincs spam</span>
+        <span>⚡ Egy kattintásos leiratkozás</span>
+        <span>🇭🇺 Magyar szülőknek</span>
+      </div>
+    </div>
+
+    <!-- ══════ JOBB: miért érdemes ══════ -->
+    <div>
+      <div class="kupon-jel">
+        <div>
+          <div class="cimke">Első vásárlás</div>
+          <div class="kod">UDVOZOL5</div>
+        </div>
+        <div style="font-size:13.5px;color:var(--tinta-2);line-height:1.45">
+          <strong style="display:block;color:var(--tinta)">5% kedvezmény</strong>
+          10 000 Ft feletti rendelésnél
+        </div>
+      </div>
+
+      <h2 class="ko-h2" style="margin:28px 0 8px">Mit kapsz?</h2>
+      <p style="font-size:14.5px;color:var(--tinta-2);margin:0 0 18px">Hetente egy levél, mindig hasznos.</p>
+
+      <div class="elonyok">
+        <div class="elony"><span class="ikon">🎯</span>
+          <div><strong>Korosztályos játéktippek</strong>
+            <span>Konkrét ajánlások a 3, a 7 vagy a 10 éves gyereknek.</span></div></div>
+        <div class="elony"><span class="ikon">🍂</span>
+          <div><strong>Szezonális ajánlatok</strong>
+            <span>Amikor tényleg érdemes vásárolni — nem spammelünk.</span></div></div>
+        <div class="elony"><span class="ikon">🎁</span>
+          <div><strong>Feliratkozói előnyök</strong>
+            <span>Black Friday és karácsonyi akciókhoz korai hozzáférés.</span></div></div>
+        <div class="elony"><span class="ikon">✉️</span>
+          <div><strong>Heti egy levél</strong>
+            <span>Bármikor leiratkozhatsz egyetlen kattintással.</span></div></div>
+      </div>
+
+      <div class="ko-kartya" style="margin-top:26px;padding:22px 24px">
+        <div class="elony"><span class="ikon">🛡️</span>
+          <div><strong>Dupla megerősítés</strong>
+            <span>A feliratkozás csak a megerősítő e-mail után válik aktívvá — így senki
+                  nem iratkozhat fel helyetted.</span></div></div>
+      </div>
+
+      <p style="margin-top:22px">
+        <a class="ko-gomb ko-gomb-masod" href="/" style="width:100%">Korábbi hírlevelek böngészése →</a>
+      </p>
+    </div>
+
+  </div>
+</main>
+
+<footer class="ko-lab">
+  <div class="wrap">
+    <div class="oszlop">
+      <strong>Kockaország.hu</strong>
+      <span>Élménysziget és Játékbolt</span>
+      <a href="https://kockaorszag.hu">kockaorszag.hu</a>
+      <a href="mailto:ugyfelszolgalat@kockaorszag.hu">ugyfelszolgalat@kockaorszag.hu</a>
+    </div>
+    <div class="oszlop">
+      <strong>Hírlevél</strong>
+      <a href="/">Archívum</a>
+      <a href="/feliratkozas">Feliratkozás</a>
+      <a href="/leiratkozas">Leiratkozás</a>
+    </div>
+    <div class="oszlop">
+      <strong>Kövess minket</strong>
+      <a href="https://www.facebook.com/kockaorszag.hu">Facebook</a>
+      <a href="https://kockaorszag.hu/adatkezelesi-tajekoztato">Adatkezelési tájékoztató</a>
+    </div>
+  </div>
+  <div class="wrap"><div class="also">© Kockaország — Élménysziget és Játékbolt · STARLIGHT PARTNERS Kft.</div></div>
+</footer>
+
+<!-- MailerLite Universal (a beagyazott urlap betoltesehez KELL) -->
+<script>
+(function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[]).push(arguments);};
+l=d.createElement(e);l.async=1;l.src=u;
+n=d.getElementsByTagName(e)[0];n.parentNode.insertBefore(l,n);
+})(window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+ml('account', '2521452');
+</script>
+<script>
+/* Tartalek: ha 8 mp utan sincs urlap, a tartalek link ELORE kerul. */
+(function(){
+  setTimeout(function(){
+    var t = document.getElementById("ml-beagyazas");
+    var urlap = t ? t.querySelector("form") : null;
+    var tart = document.getElementById("ml-tartalek");
+    if (!urlap && tart) {
+      tart.style.borderTop = "0";
+      tart.style.marginTop = "8px";
+      tart.style.fontSize = "15px";
+      tart.style.color = "#1a2233";
+    }
+  }, 8000);
+})();
+</script>
+</body>
+</html>

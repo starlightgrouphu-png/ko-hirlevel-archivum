@@ -1,0 +1,142 @@
+/* =========================================================================
+   KOCKAORSZÁG — archívum-kiegészítő (a főoldal + a levél-oldal osztályai)
+   A ko-kozos.css UTÁN töltendő be. A SZABÁLYZAT 3/A fejezete szerint:
+   itt él a kereső, a kártyarács és a levél-nézet — a közös palettával.
+   ========================================================================= */
+
+/* ── KERESŐ ───────────────────────────────────────────────────────────── */
+.kereso-sav{margin:34px 0 0}
+.kereso-doboz{position:relative;display:flex;align-items:center}
+.kereso-ikon{position:absolute;left:18px;width:20px;height:20px;color:var(--tinta-3);pointer-events:none}
+.kereso-doboz input[type=search]{
+  width:100%;padding:15px 48px 15px 50px;font-family:inherit;font-size:16px;
+  color:var(--tinta);background:var(--feher);border:1.5px solid var(--vonal-2);
+  border-radius:999px;box-shadow:var(--arnyek);outline:0;
+}
+.kereso-doboz input[type=search]:focus{border-color:var(--lila);box-shadow:0 0 0 4px rgba(123,79,201,.12)}
+.kereso-doboz input[type=search]::-webkit-search-cancel-button{display:none}
+.kereso-doboz .torles{
+  position:absolute;right:14px;width:30px;height:30px;border:0;border-radius:50%;
+  background:var(--vonal);color:var(--tinta-2);font-size:19px;line-height:1;
+  cursor:pointer;display:none;align-items:center;justify-content:center;
+}
+.kereso-doboz .torles.lat{display:flex}
+.kereso-info{margin:12px 2px 0;font-size:14px;color:var(--tinta-2);min-height:20px}
+
+/* ── KÁRTA-RÁCS (archívum) ────────────────────────────────────────────── */
+.racs{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:22px;margin-top:26px}
+.kartya{
+  display:flex;flex-direction:column;background:var(--feher);
+  border:1px solid var(--vonal);border-radius:18px;padding:26px 26px 22px;
+  box-shadow:var(--arnyek);text-decoration:none;color:inherit;
+  transition:transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+}
+.kartya:hover{text-decoration:none;transform:translateY(-3px);border-color:#d9dcee;box-shadow:var(--arnyek-nagy)}
+.kartya .kartya-meta{display:flex;gap:9px;align-items:center;flex-wrap:wrap;font-size:12.5px;color:var(--tinta-3);font-weight:600}
+.kartya .kartya-meta .pont{width:3px;height:3px;border-radius:50%;background:var(--vonal-2)}
+.kartya h2{font-size:19.5px;font-weight:800;line-height:1.25;margin:12px 0 8px}
+.kartya p{margin:0;font-size:14.5px;color:var(--tinta-2);flex:1}
+.kartya .megnyit{
+  margin-top:18px;padding-top:14px;border-top:1px solid var(--vonal);
+  font-size:14.5px;font-weight:700;color:var(--lila);display:flex;align-items:center;gap:7px;
+}
+.kartya .megnyit .nyil{transition:transform .16s ease}
+.kartya:hover .megnyit .nyil{transform:translateX(4px)}
+.uzenet{
+  grid-column:1/-1;text-align:center;padding:56px 24px;color:var(--tinta-2);
+  background:var(--feher);border:1px dashed var(--vonal-2);border-radius:18px;
+}
+
+/* ── BEVEZETŐ / STATISZTIKA ───────────────────────────────────────────── */
+.bevezeto{margin:46px 0 0}
+.bevezeto .focim{font-size:clamp(30px,4.4vw,46px);font-weight:800;letter-spacing:-.028em;line-height:1.13}
+.bevezeto .focim .szin{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.bevezeto .leadas{font-size:17px;color:var(--tinta-2);max-width:660px;margin:16px 0 0}
+.bevezeto .sav{display:inline-flex;align-items:center;gap:9px;margin-top:20px;
+  padding:8px 16px;background:var(--feher);border:1px solid var(--vonal);
+  border-radius:999px;font-size:13.5px;font-weight:600;color:var(--tinta-2)}
+.bevezeto .sav .potty{width:8px;height:8px;border-radius:50%;background:var(--zold);
+  box-shadow:0 0 0 4px rgba(18,160,92,.14)}
+
+/* ── LEVÉL-NÉZET ──────────────────────────────────────────────────────── */
+.level-keret{
+  background:var(--feher);border:1px solid var(--vonal);border-radius:20px;
+  padding:44px 48px;box-shadow:var(--arnyek);margin-top:32px;
+}
+.level-keret .meta{font-size:13.5px;color:var(--tinta-3);font-weight:600;margin-bottom:8px}
+.level-keret .cta-sav{margin-top:36px;padding-top:26px;border-top:1px solid var(--vonal);
+  display:flex;gap:12px;flex-wrap:wrap}
+.level-keret .vissza{display:inline-flex;align-items:center;gap:7px;font-size:14.5px;font-weight:700}
+/* A hírlevél-tartalom iframe-je: teljes szelesseg, a magassagot a JS igazitja a tartalomhoz */
+#level{
+  display:block;width:100%;border:0;margin:0;background:transparent;
+  min-height:600px;height:900px;   /* alap; betoltes utan a JS pontosan meri */
+  overflow:hidden;
+}
+@media(max-width:700px){.level-keret{padding:26px 22px}}
+
+/* ── LÉPÉSEK (leiratkozás-útmutató) ──────────────────────────────────── */
+.lepes{display:flex;gap:16px;align-items:flex-start;padding:18px 0;border-bottom:1px solid var(--vonal)}
+.lepes:first-of-type{padding-top:0}
+.lepes:last-of-type{border-bottom:0}
+.lepes-szam{
+  flex:0 0 auto;width:34px;height:34px;border-radius:50%;
+  background:var(--grad);color:#fff;font-weight:800;font-size:15px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 12px rgba(123,79,201,.26);
+}
+.lepes strong{display:block;font-size:16px;font-weight:800;letter-spacing:-.015em;margin-bottom:4px}
+.lepes p{margin:0;font-size:14.5px;color:var(--tinta-2);line-height:1.6}
+.lepes p + p{margin-top:6px}
+.elvalaszto{height:1px;background:var(--vonal);margin:22px 0}
+.megjegyzes{font-size:14px;color:var(--tinta-2);line-height:1.6}
+.megjegyzes b{color:var(--tinta)}
+.vissza{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:22px}
+.vissza p{margin:0;font-size:14.5px;color:var(--tinta-2)}
+.urlap-doboz{
+  background:var(--feher);border:1px solid var(--vonal);border-radius:20px;
+  padding:34px;box-shadow:var(--arnyek);margin-top:30px;max-width:680px;
+}
+@media(max-width:640px){.urlap-doboz{padding:22px}}
+
+/* ── GOMB-KOMPATIBILITÁS (a régi osztálynevek átvezetése) ─────────────── */
+.gomb{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:12px 26px;border-radius:999px;border:0;cursor:pointer;
+  font-family:inherit;font-size:15px;font-weight:700;text-decoration:none;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.gomb:hover{text-decoration:none;transform:translateY(-1px)}
+.gomb-elsodleges,.gomb-nyilt{background:var(--grad);color:#fff;box-shadow:0 8px 22px rgba(123,79,201,.28)}
+.gomb-elsodleges:hover,.gomb-nyilt:hover{box-shadow:0 12px 28px rgba(123,79,201,.34)}
+.gomb-masodlagos{background:var(--feher);color:var(--tinta);border:1.5px solid var(--vonal-2)}
+.gomb-masodlagos:hover{border-color:var(--lila);color:var(--lila)}
+
+/* ── LOGÓ- ÉS FEJLÉC-KOMPATIBILITÁS (a főoldal régi osztályai) ───────── */
+.befogo{max-width:1180px;margin:0 auto;padding:0 28px}
+.fejlec-belso{display:flex;align-items:center;justify-content:space-between;gap:22px;
+  min-height:104px;padding:10px 0}
+.logo{display:flex;align-items:center;gap:16px;text-decoration:none;color:inherit}
+.logo img{height:92px;width:auto;display:block}
+.logo .valaszto{width:1px;height:44px;background:var(--vonal-2)}
+.logo .felirat{display:flex;flex-direction:column;line-height:1.15}
+.logo .felirat b{font-size:17px;font-weight:800;letter-spacing:-.02em}
+.logo .felirat span{font-size:11.5px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--tinta-3)}
+.gombok{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+label{font-size:14px;font-weight:600;color:var(--tinta-2)}
+input[type=email],input[type=text]{
+  width:100%;padding:14px 16px;font-family:inherit;font-size:15.5px;color:var(--tinta);
+  background:var(--feher);border:1.5px solid var(--vonal-2);border-radius:12px;outline:0;
+}
+input[type=email]:focus,input[type=text]:focus{border-color:var(--lila);box-shadow:0 0 0 3px rgba(123,79,201,.14)}
+
+@media(max-width:900px){
+  .befogo{padding:0 18px}
+  .fejlec-belso{min-height:0;flex-wrap:wrap;gap:14px;padding:14px 0}
+  .logo img{height:66px}
+  .logo .valaszto{height:34px}
+  .gombok{width:100%}
+  .gomb,.gomb-elsodleges,.gomb-nyilt,.gomb-masodlagos{padding:11px 20px;font-size:14.5px}
+}
+@media(max-width:420px){.logo .valaszto{display:none}}

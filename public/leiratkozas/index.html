@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leiratkozás a hírlevélről — Kockaország</title>
+<meta name="description" content="Leiratkozás a Kockaország hírlevélről. A leiratkozás azonnali és végleges.">
+<meta name="theme-color" content="#2aace2">
+<meta name="robots" content="noindex, follow">
+<link rel="icon" href="/ko-logo-color-tight.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/ko-kozos.css">
+<link rel="stylesheet" href="/ko-archivum.css">
+<style>
+  .hero{margin:56px 0 0;max-width:660px}
+  .hero p{font-size:17px;color:var(--tinta-2);margin:16px 0 0}
+
+  .urlap-doboz{
+    background:var(--feher);border:1px solid var(--vonal);border-radius:18px;
+    padding:30px;box-shadow:var(--arnyek);margin-top:32px;max-width:660px;
+  }
+  .urlap-doboz label{display:block;font-size:15px;font-weight:700;margin-bottom:10px}
+  .urlap-doboz input[type=email]{
+    width:100%;padding:14px 16px;border:1.5px solid var(--vonal-2);border-radius:12px;
+    font-family:inherit;font-size:15.5px;color:var(--tinta);background:var(--feher);
+    margin-bottom:14px;
+  }
+  .urlap-doboz input[type=email]:focus{outline:0;border-color:var(--lila);
+    box-shadow:0 0 0 3px rgba(123,79,201,.14)}
+
+  .elvalaszto{height:1px;background:var(--vonal);margin:26px 0}
+
+  .vissza{
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+    padding:16px 18px;background:var(--zold-halvany);border:1px solid #c8ecd8;
+    border-radius:14px;
+  }
+  .vissza p{margin:0;font-size:14.5px;color:#14603f;font-weight:600}
+
+  .megjegyzes{margin:22px 0 0;font-size:13.5px;color:var(--tinta-3);line-height:1.6}
+  .megjegyzes a{text-decoration:underline}
+
+  /* siker-állapot */
+  .kesz{display:none;text-align:center;padding:14px 0}
+  .kesz .jel{width:64px;height:64px;margin:0 auto 16px;border-radius:50%;
+    background:var(--zold-halvany);display:flex;align-items:center;justify-content:center;font-size:30px}
+  .kesz strong{display:block;font-size:19px;color:#12794a;font-weight:800;margin-bottom:8px}
+  .kesz p{margin:0;font-size:14.5px;color:var(--tinta-2);line-height:1.6}
+
+  @media(max-width:640px){.urlap-doboz{padding:24px}}
+</style>
+</head>
+<body>
+
+<header class="ko-fej">
+  <div class="wrap">
+    <a class="ko-logo" href="/">
+      <img src="/ko-logo-color-tight.svg" alt="Kockaország — Élménysziget és Játékbolt">
+      <span class="valaszto"></span>
+      <span class="nev"><b>Hírlevél-archívum</b><span>Kockaország</span></span>
+    </a>
+    <nav class="ko-nav">
+      <a class="navlink" href="/">Archívum</a>
+      <a class="navlink" href="/feliratkozas">Feliratkozás</a>
+      <a class="ko-gomb ko-gomb-elso" href="https://kockaorszag.hu/akciok" target="_blank" rel="noopener">Akciók →</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="hero">
+    <div class="ko-alcim">Hírlevél-beállítások</div>
+    <h1 class="ko-h1" style="margin-top:10px">Leiratkozás a hírlevélről</h1>
+    <p>Ha nem szeretnéd tovább kapni a heti játéktippeket és ajánlatokat, itt tudsz leiratkozni.
+       A leiratkozás azonnali és végleges — és semmilyen más levelet nem küldünk utána.</p>
+  </div>
+
+  <div class="urlap-doboz">
+
+    <!-- ══ ÚTMUTATÁS (nincs hazug gomb — 2026-09-17 javítás) ══ -->
+    <div id="urlap-blokk">
+      <div class="lepes">
+        <span class="lepes-szam">1</span>
+        <div>
+          <strong>Nyisd meg a legutóbbi hírlevelünket</strong>
+          <p>Minden levél alján megtalálod a <b>„Leiratkozás"</b> linket — az a te személyes linked,
+             ezért azonnal és biztosan működik.</p>
+        </div>
+      </div>
+
+      <div class="lepes">
+        <span class="lepes-szam">2</span>
+        <div>
+          <strong>Kattints rá</strong>
+          <p>A leiratkozás azonnali és végleges. Semmilyen más levelet nem küldünk utána.</p>
+        </div>
+      </div>
+
+      <div class="elvalaszto"></div>
+
+      <p class="megjegyzes">
+        <b>Nem találod a levelet?</b> Írj nekünk, és egy munkanapon belül kézzel leiratkoztatunk:
+        <a href="mailto:ugyfelszolgalat@kockaorszag.hu?subject=Leiratkoz%C3%A1s%20k%C3%A9r%C3%A9s&amp;body=K%C3%A9rem%2C%20iratkozzanak%20le%20az%20al%C3%A1bbi%20e-mail-c%C3%ADmr%C5%91l%3A%20">ugyfelszolgalat@kockaorszag.hu</a>
+      </p>
+
+      <div class="vissza">
+        <p style="flex:1 1 auto">Ha meggondoltad magad, inkább maradj velünk:</p>
+        <a class="ko-gomb ko-gomb-masod" href="/feliratkozas">Inkább feliratkozom</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="ko-lab">
+  <div class="wrap">
+    <div class="oszlop">
+      <strong>Kockaország.hu</strong>
+      <span>Élménysziget és Játékbolt</span>
+      <a href="https://kockaorszag.hu">kockaorszag.hu</a>
+      <a href="mailto:ugyfelszolgalat@kockaorszag.hu">ugyfelszolgalat@kockaorszag.hu</a>
+    </div>
+    <div class="oszlop">
+      <strong>Hírlevél</strong>
+      <a href="/">Archívum</a>
+      <a href="/feliratkozas">Feliratkozás</a>
+      <a href="/leiratkozas">Leiratkozás</a>
+    </div>
+    <div class="oszlop">
+      <strong>Kövess minket</strong>
+      <a href="https://www.facebook.com/kockaorszag.hu">Facebook</a>
+      <a href="https://kockaorszag.hu/adatkezelesi-tajekoztato">Adatkezelési tájékoztató</a>
+    </div>
+  </div>
+  <div class="wrap"><div class="also">© Kockaország — Élménysziget és Játékbolt · STARLIGHT PARTNERS Kft.</div></div>
+</footer>
+
+<!-- Nincs hamis küldés: a leiratkozás a levélben lévő személyes linkkel működik. -->
+</body>
+</html>

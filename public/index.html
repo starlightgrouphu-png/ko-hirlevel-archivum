@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hírlevél-archívum — Kockaország</title>
+<meta name="description" content="A Kockaország korábbi hírlevelei egy helyen — böngészhető, kereshető archívum.">
+<meta property="og:title" content="Hírlevél-archívum — Kockaország">
+<meta property="og:description" content="A Kockaország korábbi hírlevelei egy helyen.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/ko-logo-color-tight.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/ko-kozos.css">
+<link rel="stylesheet" href="/ko-archivum.css">
+<style>
+
+  :root{
+    /* Kockaország arculat */
+    --kek:      #2aace2;   /* logó kék */
+    --lila:     #7b4fc9;   /* logó lila */
+    --magenta:  #e0359a;   /* logó magenta */
+    --tinta:    #14161c;
+    --tinta-2:  #565c6b;
+    --tinta-3:  #8a90a0;
+    --vonal:    #e8eaf0;
+    --papir:    #fbfbfd;
+    --feher:    #ffffff;
+    /* tipográfia */
+    --betu: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    /* tér */
+    --r: 18px;
+    --arnyek: 0 1px 2px rgba(20,22,28,.04), 0 8px 24px -12px rgba(20,22,28,.14);
+    --arnyek-ho: 0 2px 4px rgba(20,22,28,.05), 0 18px 40px -16px rgba(42,172,226,.30);
+  }
+
+  *{box-sizing:border-box}
+
+  html{-webkit-text-size-adjust:100%; scroll-behavior:smooth}
+
+  body{
+    margin:0; background:var(--papir); color:var(--tinta);
+    font-family:var(--betu); font-size:16.5px; line-height:1.6;
+    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+    font-feature-settings:"kern" 1,"liga" 1,"calt" 1;
+  }
+
+  ::selection{background:var(--kek); color:#fff}
+
+  a{color:inherit}
+
+
+  /* ── FEJLÉC ───────────────────────────────────────────── */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(255,255,255,.86);
+    backdrop-filter:saturate(180%) blur(18px);
+    -webkit-backdrop-filter:saturate(180%) blur(18px);
+    border-bottom:1px solid var(--vonal);
+  }
+
+  .logo img{
+    height:92px; width:auto; display:block; flex:none;
+    /* finom lebegés-érzet */
+    filter:drop-shadow(0 4px 10px rgba(42,172,226,.13));
+    transition:transform .45s cubic-bezier(.22,1,.36,1), filter .45s ease;
+  }
+
+  .felirat b{
+    font-size:19px; font-weight:700; letter-spacing:-.022em; color:var(--tinta);
+    line-height:1.15; white-space:nowrap;
+  }
+
+  .felirat span{
+    font-size:12px; font-weight:700; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--tinta-2); white-space:nowrap;
+  }
+
+  /* a szöveg alatt finom arculati csík */
+  .felirat span::after{
+    content:""; display:block; height:2px; margin-top:6px; border-radius:2px;
+    background:linear-gradient(90deg,var(--kek),var(--lila) 55%,var(--magenta));
+    opacity:.85; width:76px;
+  }
+
+  .kereso-doboz input{
+    flex:1; min-width:0; border:0; outline:0; background:transparent;
+    font-family:var(--betu); font-size:15.5px; font-weight:500; color:var(--tinta);
+    padding:15px 12px;
+  }
+
+  .kereso-doboz input::placeholder{color:var(--tinta-3); font-weight:500}
+
+  .kereso-doboz input::-webkit-search-cancel-button{display:none}
+
+  .torles.latszik{display:flex}
+
+  .datum{
+    font-size:11.5px; font-weight:700; letter-spacing:.11em; text-transform:uppercase;
+    color:var(--kek);
+  }
+
+  .kartya h3{
+    margin:0; font-size:20.5px; font-weight:700; letter-spacing:-.022em;
+    line-height:1.28; color:var(--tinta);
+  }
+
+  .kivonat{
+    margin:0; font-size:14.5px; line-height:1.62; color:var(--tinta-2);
+    display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;
+  }
+
+  .lablec{
+    margin-top:auto; padding-top:16px; display:flex; align-items:center;
+    justify-content:space-between; gap:12px;
+    border-top:1px solid var(--vonal);
+  }
+
+  .chip{
+    font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+    padding:4px 11px; border-radius:999px; color:#0d7a52; background:#e6f7f0;
+  }
+
+  .chip.draft{color:#8a5a00; background:#fdf3e0}
+
+  .kartya-meta .ido{color:var(--tinta-2)}
+
+  .kartya-meta .pontocske{opacity:.5}
+
+  .kartya-meta .kepek{color:var(--tinta-3)}
+
+  .uzenet .ikon{font-size:42px; margin-bottom:14px; opacity:.7}
+
+  .uzenet p{margin:0; font-size:15px}
+
+
+  /* ── LÁBLÉC ───────────────────────────────────────────── */
+  footer{border-top:1px solid var(--vonal); background:var(--feher)}
+
+  .lab-belso{
+    display:flex; align-items:center; justify-content:space-between; gap:20px;
+    padding:34px 0; flex-wrap:wrap;
+  }
+
+  .lab-belso .marka{
+    font-size:14px; color:var(--tinta-3); display:flex; align-items:center; gap:10px;
+  }
+
+  .lab-belso .marka img{height:26px; width:auto; opacity:.55}
+
+  .lab-linkek{display:flex; gap:22px; font-size:14px}
+
+  .lab-linkek a{color:var(--tinta-3); text-decoration:none; transition:color .2s ease}
+
+  .lab-linkek a:hover{color:var(--lila)}
+
+    .logo img{height:66px}
+
+    .felirat b{font-size:16.5px}
+
+    .felirat span{font-size:9.5px; letter-spacing:.11em}
+
+    .felirat span::after{width:48px; margin-top:5px}
+
+    .logo img{height:52px}
+
+    .felirat b{font-size:15px}
+
+    .felirat span{font-size:9px}
+
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none !important; animation:none !important}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="befogo fejlec-belso">
+    <a class="logo" href="/">
+      <img src="/ko-logo-color-tight.svg" alt="Kockaország — Játékbolt és Élménysziget">
+      <span class="valaszto"></span>
+      <span class="felirat">
+        <b>Hírlevél-archívum</b>
+        <span>Élménysziget és Játékbolt</span>
+      </span>
+    </a>
+    <div class="gombok">
+      <a class="gomb gomb-nyilt" href="/feliratkozas">Feliratkozás</a>
+      <a class="gomb gomb-elsodleges" href="https://kockaorszag.hu/akciok" target="_blank" rel="noopener">
+        Akciók <span class="nyil">→</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main class="befogo">
+  <div class="bevezeto">
+    <h1 class="focim">Hírleveleink <span class="szin">archívuma</span></h1>
+    <p class="leadas">
+      Minden korábbi hírlevelünk egy helyen — akciók, újdonságok és ötletek,
+      hogy visszakereshesd, amit érdemes.
+    </p>
+    <div class="sav">
+      <span class="potty"></span>
+      <span id="darab">Betöltés…</span>
+    </div>
+  </div>
+
+
+  <div class="kereso-sav">
+    <div class="kereso-doboz">
+      <svg class="kereso-ikon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.2-3.2"></path></svg>
+      <input type="search" id="kereso" placeholder="Keresés a hírlevelekben…" autocomplete="off" aria-label="Keresés a hírlevelekben">
+      <button type="button" id="torles" class="torles" aria-label="Keresés törlése">×</button>
+    </div>
+    <div class="kereso-info" id="kereso-info"></div>
+  </div>
+
+  <div class="racs" id="racs">
+    <div class="uzenet"><div class="ikon">📬</div><p>Hírlevelek betöltése…</p></div>
+  </div>
+</main>
+
+<footer>
+  <div class="befogo lab-belso">
+    <div class="marka">
+      <img src="/ko-logo-color-tight.svg" alt="Kockaország">
+      <a href="https://kockaorszag.hu" target="_blank" rel="noopener">Kockaország — Játékbolt és Élménysziget</a>
+    </div>
+    <nav class="lab-linkek">
+      <a href="https://kockaorszag.hu" target="_blank" rel="noopener">kockaorszag.hu</a>
+      <a href="https://kockaorszag.hu/shop_help.php?tab=privacy_policy" target="_blank" rel="noopener">Adatvédelem</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="/archivum.js"></script>
+</body>
+</html>

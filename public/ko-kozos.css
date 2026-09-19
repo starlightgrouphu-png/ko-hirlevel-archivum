@@ -1,0 +1,117 @@
+/* =========================================================================
+   KOCKAORSZÁG — közös arculat (design-rendszer)
+   A SZABÁLYZAT 3/A fejezete szerint. Ezt a fájlt MINDEN oldal betölti,
+   így a paletta / fejléc / lábléc egy helyen él.
+   ========================================================================= */
+
+:root{
+  /* a KO logóból kiolvasott paletta */
+  --kek:#2aace2;    --kek-2:#1d90c9;
+  --lila:#7b4fc9;   --magenta:#e0359a;
+--tinta:#14161c;  --tinta-2:#565c6b;  --tinta-3:#8a90a0;
+  --vonal:#e8eaf0;  --vonal-2:#d8dce8;
+  --papir:#fbfbfd;  --feher:#ffffff;
+  --zold:#12a05c;   --zold-halvany:#eefaf3;
+  --grad:linear-gradient(135deg,#2aace2 0%,#7b4fc9 62%,#e0359a 118%);
+  --arnyek:0 1px 2px rgba(20,22,28,.04), 0 12px 32px rgba(20,22,28,.07);
+  --arnyek-nagy:0 2px 6px rgba(20,22,28,.05), 0 24px 56px rgba(20,22,28,.10);
+}
+
+/* ── alap ─────────────────────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  font-size:16.5px; line-height:1.6; color:var(--tinta);
+  background:var(--papir);
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--kek-2);text-decoration:none}
+a:hover{text-decoration:underline}
+img{max-width:100%;display:block}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+.szük{max-width:760px}
+@media(max-width:640px){.wrap{padding:0 18px}}
+
+/* ── FEJLÉC ───────────────────────────────────────────────────────────── */
+.ko-fej{
+  position:sticky; top:0; z-index:50;
+  background:rgba(251,251,253,.88);
+  backdrop-filter:saturate(180%) blur(12px);
+  -webkit-backdrop-filter:saturate(180%) blur(12px);
+  border-bottom:1px solid var(--vonal);
+}
+.ko-fej .wrap{display:flex;align-items:center;gap:22px;min-height:104px;padding-top:10px;padding-bottom:10px}
+.ko-logo{display:flex;align-items:center;gap:16px;flex:0 0 auto;text-decoration:none;color:inherit}
+.ko-logo img{height:92px;width:auto}
+.ko-logo .valaszto{width:1px;height:44px;background:var(--vonal-2)}
+.ko-logo .nev{display:flex;flex-direction:column;line-height:1.15}
+.ko-logo .nev b{font-size:17px;font-weight:800;letter-spacing:-.02em;color:var(--tinta)}
+.ko-logo .nev span{font-size:11.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--tinta-3)}
+.ko-nav{margin-left:auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ko-nav a.navlink{
+  font-size:14.5px;font-weight:600;color:var(--tinta-2);padding:9px 4px;
+  border-bottom:2px solid transparent;
+}
+.ko-nav a.navlink:hover{color:var(--tinta);text-decoration:none;border-bottom-color:var(--vonal-2)}
+.ko-nav a.navlink.aktiv{color:var(--tinta);border-bottom-color:var(--kek)}
+
+/* gombok */
+.ko-gomb{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:12px 26px;border-radius:999px;border:0;cursor:pointer;
+  font-family:inherit;font-size:15px;font-weight:700;letter-spacing:-.01em;
+  text-decoration:none;transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.ko-gomb:hover{text-decoration:none;transform:translateY(-1px)}
+.ko-gomb-elso{background:var(--grad);color:#fff;box-shadow:0 8px 22px rgba(123,79,201,.28)}
+.ko-gomb-elso:hover{box-shadow:0 12px 28px rgba(123,79,201,.34)}
+.ko-gomb-masod{background:var(--feher);color:var(--tinta);border:1.5px solid var(--vonal-2)}
+.ko-gomb-masod:hover{border-color:var(--lila);color:var(--lila)}
+.ko-gomb-szeles{width:100%}
+.ko-gomb:disabled{opacity:.6;cursor:not-allowed;transform:none}
+
+/* ── LÁBLÉC ───────────────────────────────────────────────────────────── */
+.ko-lab{
+  margin-top:72px;background:var(--feher);border-top:1px solid var(--vonal);
+  padding:36px 0 44px;font-size:14px;color:var(--tinta-2);
+}
+.ko-lab .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:flex-start}
+.ko-lab .oszlop{display:flex;flex-direction:column;gap:6px}
+.ko-lab strong{color:var(--tinta);font-size:14.5px}
+.ko-lab a{color:var(--tinta-2)}
+.ko-lab a:hover{color:var(--lila)}
+.ko-lab .also{margin-top:22px;padding-top:18px;border-top:1px solid var(--vonal);
+  font-size:12.5px;color:var(--tinta-3);text-align:center}
+
+/* ── KÁRTYA ───────────────────────────────────────────────────────────── */
+.ko-kartya{
+  background:var(--feher);border:1px solid var(--vonal);border-radius:18px;
+  padding:32px;box-shadow:var(--arnyek);
+}
+
+/* ── CÍMEK ────────────────────────────────────────────────────────────── */
+h1,h2,h3{letter-spacing:-.025em;color:var(--tinta);margin:0}
+.ko-h1{font-size:clamp(28px,4.2vw,44px);font-weight:800;line-height:1.14}
+.ko-h2{font-size:clamp(20px,2.4vw,24px);font-weight:800}
+.ko-alcim{font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--tinta-3)}
+.grad-szoveg{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ── MOBIL ────────────────────────────────────────────────────────────── */
+@media(max-width:900px){
+  .ko-fej .wrap{min-height:0;flex-wrap:wrap;gap:14px;padding-top:14px;padding-bottom:14px}
+  .ko-logo img{height:66px}
+  .ko-logo .valaszto{height:34px}
+  .ko-logo .nev b{font-size:15px}
+  .ko-logo .nev span{font-size:10px}
+  .ko-nav{margin-left:0;width:100%}
+  .ko-nav a.navlink{font-size:14px}
+  .ko-gomb{padding:11px 20px;font-size:14.5px}
+  .ko-lab{margin-top:52px}
+  .ko-kartya{padding:24px}
+}
+@media(max-width:420px){
+  .ko-logo img{height:56px}
+  .ko-logo .valaszto{display:none}
+  .ko-nav{gap:6px}
+}

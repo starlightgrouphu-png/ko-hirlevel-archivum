@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Feliratkozás megerősítése — Kockaország hírlevél</title>
+<meta name="description" content="Erősítsd meg a Kockaország hírlevélre való feliratkozásodat, és azonnal megkapod az 5% kedvezménykupont az első vásárlásodhoz.">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="Feliratkozás megerősítése — Kockaország hírlevél">
+<meta property="og:url" content="https://ko-hirlevel-archivum.vercel.app/hirlevel-megerosites">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#2aace2">
+<link rel="canonical" href="https://ko-hirlevel-archivum.vercel.app/hirlevel-megerosites">
+<link rel="icon" href="/ko-logo-color-tight.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/ko-kozos.css">
+<link rel="stylesheet" href="/ko-archivum.css">
+<style>
+  main{padding:52px 0 72px}
+  .racs{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:start}
+  @media(max-width:900px){.racs{grid-template-columns:1fr;gap:22px}}
+
+  .panel{
+    background:var(--feher);border:1px solid var(--vonal);border-radius:18px;
+    padding:32px;box-shadow:var(--arnyek);
+  }
+  .panel h2{font-size:21px;font-weight:800;letter-spacing:-.02em;margin:0 0 10px}
+  .panel > p{font-size:15px;color:var(--tinta-2);margin:0 0 16px}
+
+  /* állapot-sáv */
+  .allapot{
+    display:flex;gap:14px;align-items:flex-start;
+    border-radius:14px;padding:18px 20px;margin-bottom:24px;
+    background:var(--zold-halvany);border:1px solid #c8ecd8;
+  }
+  .allapot .jel{font-size:22px;line-height:1.2;flex:0 0 auto}
+  .allapot strong{display:block;font-size:16px;font-weight:800;color:#12794a;margin-bottom:3px}
+  .allapot span{font-size:14.5px;color:#2f5c46;line-height:1.55}
+
+  /* kupon */
+  .kupon{
+    display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+    background:linear-gradient(135deg,#fffdf6,#fff7e8);
+    border:2px dashed var(--sarga-2);border-radius:16px;
+    padding:18px 20px;margin:20px 0 24px;
+  }
+  .kupon .cimke{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--tinta-3);margin-bottom:5px}
+  .kupon .kod{
+    font-size:25px;font-weight:800;letter-spacing:.11em;color:#231a02;
+    font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  }
+
+  /* előny-lista */
+  .elonyok{display:flex;flex-direction:column;gap:16px}
+  .elony{display:flex;gap:13px;align-items:flex-start}
+  .elony .ikon{
+    flex:0 0 38px;height:38px;border-radius:11px;display:flex;align-items:center;
+    justify-content:center;font-size:18px;background:var(--papir);border:1px solid var(--vonal)
+  }
+  .elony strong{display:block;font-size:15px;font-weight:700;color:var(--tinta)}
+  .elony span{font-size:14px;color:var(--tinta-2);line-height:1.5}
+
+  /* lépcsők */
+  .lepcsok{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}
+  .lepes{
+    flex:1 1 120px;background:var(--papir);border:1px solid var(--vonal);border-radius:11px;
+    padding:11px 12px;font-size:12.5px;color:var(--tinta-3);text-align:center;font-weight:600
+  }
+  .lepes.kesz{background:var(--zold-halvany);border-color:#c8ecd8;color:#12794a}
+  .lepes.aktiv{
+    background:linear-gradient(135deg,rgba(42,172,226,.12),rgba(123,79,201,.12));
+    border-color:rgba(123,79,201,.35);color:#54309b
+  }
+
+  /* hiba-állapot */
+  .hiba{
+    display:flex;gap:14px;align-items:flex-start;
+    border-radius:14px;padding:18px 20px;margin-bottom:24px;
+    background:#fdf3f3;border:1px solid #f3d6d6;
+  }
+  .hiba .jel{font-size:22px;line-height:1.2;flex:0 0 auto}
+  .hiba strong{display:block;font-size:16px;font-weight:800;color:#b93c38;margin-bottom:3px}
+  .hiba span{font-size:14.5px;color:#7a403e;line-height:1.55}
+
+  .gdpr{margin:20px 0 0;font-size:12.5px;color:var(--tinta-3);line-height:1.6;
+    border-top:1px solid var(--vonal);padding-top:16px}
+  .gdpr a{text-decoration:underline}
+</style>
+</head>
+<body>
+
+<header class="ko-fej">
+  <div class="wrap">
+    <a class="ko-logo" href="/">
+      <img src="/ko-logo-color-tight.svg" alt="Kockaország — Élménysziget és Játékbolt">
+      <span class="valaszto"></span>
+      <span class="nev"><b>Hírlevél-archívum</b><span>Kockaország</span></span>
+    </a>
+    <nav class="ko-nav">
+      <a class="navlink" href="/">Archívum</a>
+      <a class="navlink" href="/feliratkozas">Feliratkozás</a>
+      <a class="ko-gomb ko-gomb-elso" href="https://kockaorszag.hu/akciok" target="_blank" rel="noopener">Akciók →</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="jel" id="hero-ikon">✅</div>
+    <h1 class="ko-h1" id="hero-cim">Sikeres megerősítés!</h1>
+    <p id="hero-szoveg">Örülünk, hogy velünk maradsz — a feliratkozásod aktív, és a kedvezménykuponod érvényes.</p>
+  </div>
+</section>
+
+<main class="wrap">
+  <div class="racs">
+
+    <!-- ═══ BAL: ÁLLAPOT ═══ -->
+    <div class="panel">
+
+      <!-- ÁLLAPOT: SIKER -->
+      <div id="doboz-siker">
+        <div class="allapot">
+          <span class="jel">✅</span>
+          <div>
+            <strong>A feliratkozásod aktív</strong>
+            <span id="siker-email">Mostantól megkapod a heti játéktippeket és a szezonális ajánlatokat.</span>
+          </div>
+        </div>
+
+        <h2>A kedvezménykuponod</h2>
+        <p>Az első vásárlásodnál azonnal beváltható a kockaorszag.hu webshopban.</p>
+
+        <div class="kupon">
+          <div>
+            <div class="cimke">Kuponkód</div>
+            <div class="kod">UDVOZOL5</div>
+          </div>
+          <button class="ko-gomb ko-gomb-masod" id="masolo" type="button">Másolás</button>
+        </div>
+
+        <div class="elonyok">
+          <div class="elony"><span class="ikon">💸</span>
+            <div><strong>5% kedvezmény</strong>
+              <span>Minimum 10 000 Ft-os rendelésnél.</span></div></div>
+          <div class="elony"><span class="ikon">⏳</span>
+            <div><strong>14 napig érvényes</strong>
+              <span>A megerősítéstől számítva.</span></div></div>
+          <div class="elony"><span class="ikon">🔢</span>
+            <div><strong>Egyszer használható</strong>
+              <span>Vásárlónként egy alkalommal.</span></div></div>
+        </div>
+
+        <div class="lepcsok">
+          <div class="lepes kesz">1. Feliratkozás ✓</div>
+          <div class="lepes kesz">2. Megerősítés ✓</div>
+          <div class="lepes aktiv">3. Vásárlás 5% kedvezménnyel</div>
+        </div>
+      </div>
+
+      <!-- ÁLLAPOT: HIBA / LEJÁRT LINK -->
+      <div id="doboz-hiba" style="display:none">
+        <div class="hiba">
+          <span class="jel">⚠️</span>
+          <div>
+            <strong>A megerősítő link nem érvényes</strong>
+            <span id="hiba-reszlet">A link lejárt, vagy már egyszer felhasználtad. Ez nem hiba — csak a biztonság kedvéért kérünk egy új megerősítést.</span>
+          </div>
+        </div>
+
+        <h2>Így tudod újra megerősíteni</h2>
+        <p>Add meg újra az e-mail-címedet, és küldünk egy friss megerősítő levelet.
+           Ha már megerősítetted, semmi teendőd — a következő hírlevelet megkapod.</p>
+
+        <p style="margin:20px 0 0">
+          <a class="ko-gomb ko-gomb-elso" href="/feliratkozas">Új megerősítő levél kérése</a>
+        </p>
+
+        <div class="elonyok" style="margin-top:26px">
+          <div class="elony"><span class="ikon">📬</span>
+            <div><strong>Már megerősítettél?</strong>
+              <span>Akkor a link azért járt le, mert egyszer már aktiváltad a feliratkozásod.</span></div></div>
+          <div class="elony"><span class="ikon">🛡️</span>
+            <div><strong>Miért van ez?</strong>
+              <span>A dupla megerősítés (double opt-in) véd téged a jogosulatlan feliratkozásoktól.</span></div></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ═══ JOBB: MI JÖN MOST ═══ -->
+    <div class="panel">
+      <h2>Mi jön most?</h2>
+      <p>A megerősítés után már csak a levelekre kell figyelned.</p>
+
+      <div class="elonyok">
+        <div class="elony"><span class="ikon">🎯</span>
+          <div><strong>Korosztályos játéktippek</strong>
+            <span>Konkrét ajánlások a 3, a 7 vagy a 10 éves gyereknek.</span></div></div>
+        <div class="elony"><span class="ikon">🍂</span>
+          <div><strong>Szezonális ajánlatok</strong>
+            <span>Amikor tényleg érdemes vásárolni — nem spammelünk.</span></div></div>
+        <div class="elony"><span class="ikon">🎁</span>
+          <div><strong>Feliratkozói előnyök</strong>
+            <span>Black Friday és karácsonyi akciókhoz korai hozzáférés.</span></div></div>
+        <div class="elony"><span class="ikon">✉️</span>
+          <div><strong>Heti egy levél</strong>
+            <span>Bármikor leiratkozhatsz egyetlen kattintással.</span></div></div>
+      </div>
+
+      <p style="margin-top:24px">
+        <a class="ko-gomb ko-gomb-elso ko-gomb-szeles" href="https://kockaorszag.hu" target="_blank" rel="noopener">Vásárlás a webshopban →</a>
+      </p>
+
+      <p class="gdpr">Adataidat az <a href="https://kockaorszag.hu/adatkezelesi-tajekoztato">adatkezelési tájékoztató</a>
+         szerint kezeljük. A feliratkozást bármikor visszavonhatod a
+         <a href="/leiratkozas">leiratkozás</a> oldalon vagy a levelek alján lévő linkkel.</p>
+    </div>
+
+  </div>
+</main>
+
+<footer class="ko-lab">
+  <div class="wrap">
+    <div class="oszlop">
+      <strong>Kockaország.hu</strong>
+      <span>Élménysziget és Játékbolt</span>
+      <a href="https://kockaorszag.hu">kockaorszag.hu</a>
+      <a href="mailto:ugyfelszolgalat@kockaorszag.hu">ugyfelszolgalat@kockaorszag.hu</a>
+    </div>
+    <div class="oszlop">
+      <strong>Hírlevél</strong>
+      <a href="/">Archívum</a>
+      <a href="/feliratkozas">Feliratkozás</a>
+      <a href="/leiratkozas">Leiratkozás</a>
+    </div>
+    <div class="oszlop">
+      <strong>Kövess minket</strong>
+      <a href="https://www.facebook.com/kockaorszag.hu">Facebook</a>
+      <a href="https://kockaorszag.hu/adatkezelesi-tajekoztato">Adatkezelési tájékoztató</a>
+    </div>
+  </div>
+  <div class="wrap"><div class="also">© Kockaország — Élménysziget és Játékbolt · STARLIGHT PARTNERS Kft.</div></div>
+</footer>
+
+<script>
+/* ---------------------------------------------------------------
+   A MailerLite double opt-in megerősítő oldala.
+   A MailerLite a megerősítő linkre kattintva IDE irányít, tipikusan
+   query-paraméterekkel. Kezelt kulcsok (bármelyik jöhet):
+     ?success=1 | ?confirmed=1 | ?status=success   -> SIKER ág
+     ?error=... | ?status=error | ?token=<lejárt>   -> HIBA ág
+   Ha nincs paraméter: a MailerLite a saját oldalán már megerősítette,
+   ezért alapból a SIKER ágat mutatjuk (ez a gyakori viselkedés).
+   --------------------------------------------------------------- */
+(function(){
+  var p = new URLSearchParams(window.location.search);
+
+  var sikerJel = ["success","confirmed","confirmed_at","ok","1"];
+  var hibaJel  = ["error","failed","invalid","expired"];
+
+  var vanSiker = false, vanHiba = false;
+
+  ["success","confirmed","status","error","message"].forEach(function(k){
+    if (!p.has(k)) return;
+    var v = String(p.get(k) || "").toLowerCase();
+    if (hibaJel.indexOf(v) !== -1) vanHiba = true;
+    if (sikerJel.indexOf(v) !== -1) vanSiker = true;
+  });
+
+  /* A 'token' paraméter önmagában NEM hiba — a MailerLite a
+     szerverén dolgozza fel. Csak explicit hibajelző esetén hiba. */
+
+  var email = p.get("email") || p.get("e") || "";
+  var dobozSiker = document.getElementById("doboz-siker");
+  var dobozHiba  = document.getElementById("doboz-hiba");
+
+  if (vanHiba && !vanSiker) {
+    document.getElementById("hero-ikon").textContent  = "⚠️";
+    document.getElementById("hero-cim").textContent   = "A link nem érvényes";
+    document.getElementById("hero-szoveg").textContent =
+      "Lehet, hogy lejárt vagy már felhasználtad. Pár másodperc alatt kérhetsz újat.";
+    document.getElementById("hiba-reszlet").textContent =
+      "A megerősítő link lejárt vagy már egyszer felhasználtad. Kérj újat — azonnal küldjük.";
+    dobozSiker.style.display = "none";
+    dobozHiba.style.display  = "block";
+    return;
+  }
+
+  /* SIKER ág (alapértelmezés) */
+  if (email) {
+    var t = document.getElementById("siker-email");
+    if (t) t.textContent = email + " — mostantól megkapod a heti játéktippeket és a szezonális ajánlatokat.";
+  }
+
+  /* Kuponkód másolása */
+  var gomb = document.getElementById("masolo");
+  if (gomb) {
+    gomb.addEventListener("click", function(){
+      var kod = "UDVOZOL5";
+      function kesz(){ gomb.textContent = "✓ Kimásolva"; setTimeout(function(){ gomb.textContent = "Másolás"; }, 2200); }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(kod).then(kesz, function(){ regiMod(kod, kesz); });
+      } else { regiMod(kod, kesz); }
+    });
+  }
+
+  function regiMod(szoveg, vissza){
+    try {
+      var ta = document.createElement("textarea");
+      ta.value = szoveg; ta.setAttribute("readonly","");
+      ta.style.position = "absolute"; ta.style.left = "-9999px";
+      document.body.appendChild(ta); ta.select();
+      document.execCommand("copy"); document.body.removeChild(ta); vissza();
+    } catch(e) { /* csendes: a kód látható, kézzel is kimásolható */ }
+  }
+})();
+</script>
+</body>
+</html>
