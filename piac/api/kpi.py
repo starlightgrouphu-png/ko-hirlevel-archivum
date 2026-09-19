@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
-"""api/kpi.py — Vercel serverless: KPI (BaseHTTPRequestHandler)."""
+"""api/kpi.py — Vercel serverless: KPI (BaseHTTPRequestHandler).
+
+Az adat a Windows-natív szinkronból érkezik: api/_adat/jelentes.json
+FAIL-CLOSED: ha nincs adat, 503-at ad — SOHA nem hazudik.
+"""
 import json
 import os
 from http.server import BaseHTTPRequestHandler
@@ -20,15 +24,22 @@ class handler(BaseHTTPRequestHandler):
         d = _b()
         if d is None:
             return self._v(503, {"hiba": "nincs adat", "ok": False})
-        kat = d.get("kategoriak", {})
+        kat = d.get("kategoriak", {}) or {}
+        # a saját termékszám: a gyökér-mező, vagy a kategóriák összege
+        sajat = d.get("sajat_termek")
+        if not sajat:
+            sajat = sum((v or {}).get("sajat", 0) for v in kat.values())
+        # a konkurens árak száma
+        konk = d.get("konkurens_ar")
+        if not konk:
+            konk = sum((v or {}).get("piac_n", 0) for v in kat.values())
         self._v(200, {
             "ok": True,
-            "sajat_termek": d.get("sajat_termek_szam", 0),
-            "konkurens": d.get("konkurens_ar_szam", 0),
-            "konkurens_ar": d.get("konkurens_ar_szam", 0),
+            "sajat_termek": sajat,
+            "konkurens": konk,
+            "konkurens_ar": konk,
             "kategoriak_szam": len(kat),
-            "utolso_meres": d.get("ido"),
-            "parosult": 0, "olcsobb": 0, "dragabb": 0,
+            "utolso_meres": d.get("ido") or d.get("utolso_meres"),
         })
 
     def _v(self, kod, obj):
