@@ -140,3 +140,6 @@ input[type=email]:focus,input[type=text]:focus{border-color:var(--lila);box-shad
   .gomb,.gomb-elsodleges,.gomb-nyilt,.gomb-masodlagos{padding:11px 20px;font-size:14.5px}
 }
 @media(max-width:420px){.logo .valaszto{display:none}}
+
+/* ── lábléc logó mérete (a level/index és a jövőbeni oldalak egyszínű mérete) ── */
+footer .marka img{height:26px;width:auto;opacity:.7;display:block}
