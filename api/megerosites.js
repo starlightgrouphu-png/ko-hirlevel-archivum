@@ -1,17 +1,16 @@
 // api/megerosites.js — KO hírlevél re-opt-in megerősítő végpont (Vercel serverless)
-// A levél CTA gombja ide érkezik:  /hirlevel-megerosites?e=<email>
+// A levél CTA gombja ide érkezik:  /api/megerosites?e=<email>
 // Feladat: a MailerLite-on a feliratkozót unconfirmed -> active állítani,
 //          majd a kupont megjeleníteni.
 //
 // BIZTONSÁG:
 //   - state-changing GET, ezért a levélből érkező link közvetlenül használható
-//   - idempotens: ha már active, nem hívunk író API-t
+//   - egyszer használható: ha már active, nem hívunk API-t (idempotens)
 //   - a MailerLite kulcs CSAK a Vercel env-ből (MAILERLITE_API_KEY)
 //
-// Vercel env beállítás:  vercel env add MAILERLITE_API_KEY production
+// Vercel env beállítás:  vercel env add MAILERLITE_API_KEY
 
 const ML_BASE = 'https://connect.mailerlite.com/api';
-const KUPON = 'UDVOZOL5';
 
 // egyszerű in-memory idempotencia (a hideg indítás újratölti — elég a védelemhez)
 const marMegerositve = new Map();
@@ -37,7 +36,6 @@ function oldal({ cim, szin, torzs, kupon }) {
   .gomb{display:inline-block;margin-top:10px;background:#201D55;color:#fff;text-decoration:none;
         padding:14px 30px;border-radius:8px;font-weight:700}
   .lab{font-size:13px;color:#7c8299;margin-top:18px}
-  .lab a{color:#7c8299}
 </style>
 </head>
 <body>
@@ -66,11 +64,12 @@ export default async function handler(req, res) {
     return;
   }
 
+  // idempotencia: ugyanaz a cím egyszer
   if (marMegerositve.get(email)) {
     res.status(200).send(oldal({
       cim: 'Már meg van erősítve ✅', szin: '#2e9e5b',
-      torzs: '<p>A feliratkozásod már aktív — nincs több teendőd. Íme a kupond:</p>',
-      kupon: KUPON
+      torzs: '<p>A feliratkozásod már aktív — nincs több teendőd.</p>',
+      kupon: 'UDVOZOL5'
     }));
     return;
   }
@@ -85,6 +84,7 @@ export default async function handler(req, res) {
   }
 
   try {
+    // 1) jelenlegi állapot
     const getu = await fetch(
       `${ML_BASE}/subscribers/${encodeURIComponent(email)}`,
       { headers: { Accept: 'application/json', Authorization: `Bearer ${kulcs}` } }
@@ -113,11 +113,12 @@ export default async function handler(req, res) {
       res.status(200).send(oldal({
         cim: 'Már meg van erősítve ✅', szin: '#2e9e5b',
         torzs: '<p>A feliratkozásod már aktív — nincs több teendőd. Íme a kupond:</p>',
-        kupon: KUPON
+        kupon: 'UDVOZOL5'
       }));
       return;
     }
 
+    // 2) unconfirmed -> active
     const put = await fetch(
       `${ML_BASE}/subscribers/${encodeURIComponent(email)}`,
       {
@@ -136,10 +137,30 @@ export default async function handler(req, res) {
 
     if (put.ok && ujAllapot === 'active') {
       marMegerositve.set(email, true);
+      // HOZZÁJÁRULÁS-NAPLÓZÁS (GDPR 7. cikk — bizonyíthatóság).
+      // A feliratkozó MOST, aktív cselekedettel erősítette meg a hozzájárulást.
+      // Ez a bizonyíték: ki, mikor, honnan. Nem blokkoló — ha nem megy, a
+      // megerősítés akkor is érvényes (de logoljuk a hibát).
+      try {
+        await fetch(process.env.HOZZAJARULAS_WEBHOOK || 'https://kockaorszag.hu/api/hozzajarulas', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email,
+            forras: 'reoptin-megerosites',
+            urlap: '198607723660575914',
+            idobelyeg: new Date().toISOString(),
+            user_agent: (req.headers['user-agent'] || '').slice(0, 200)
+          })
+        });
+      } catch (logHiba) {
+        // a naplózás kudarca nem blokkolja a megerősítést
+        console.error('hozzajarulas-naplo hiba:', logHiba?.message || logHiba);
+      }
       res.status(200).send(oldal({
         cim: 'Sikeres megerősítés! ✅', szin: '#2e9e5b',
-        torzs: '<p>Örülünk, hogy velünk maradsz — a feliratkozásod aktív, és a kedvezménykuponod érvényes.</p>',
-        kupon: KUPON
+        torzs: `<p>Örülünk, hogy velünk maradsz — a feliratkozásod aktív, és a kedvezménykuponod érvényes.</p>`,
+        kupon: 'UDVOZOL5'
       }));
       return;
     }
