@@ -9,6 +9,10 @@
     {
       "source": "/level/:id",
       "destination": "/level/index.html"
+    },
+    {
+      "source": "/hirlevel-megerosites",
+      "destination": "/api/megerosites"
     }
   ],
   "redirects": [
