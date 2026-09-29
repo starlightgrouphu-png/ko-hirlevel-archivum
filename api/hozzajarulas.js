@@ -46,7 +46,7 @@ export default async function handler(req, res) {
       const r = await fetch(`${process.env.KV_REST_API_URL}/set/${encodeURIComponent(kulcs)}`, {
         method: 'POST',
         headers: {
-          Authorization: *** `Bearer ${process.env.KV_REST_API_TOKEN}`,
+          Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}`,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(JSON.stringify(bejegyzes))
